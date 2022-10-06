@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="view.dealership_software.GUIController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane prefHeight="496.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.dealership_software.GUIController">
+
+   <children>
+
+      <MenuBar prefHeight="30.0" prefWidth="800.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+                  <MenuItem fx:id="importJSONID" mnemonicParsing="false" onAction="#readJSON" onMenuValidation="#readJSON" text="Import JSON" />
+                  <MenuItem mnemonicParsing="false" text="import XML" />
+                  <MenuItem mnemonicParsing="false" onAction="#exitProgram" onMenuValidation="#exitProgram" text="Save and Exit" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Button fx:id="addCarID" disable="true" layoutX="312.0" layoutY="93.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Add Car" />
+      <Button disable="true" layoutX="305.0" layoutY="254.0" mnemonicParsing="false" text="Set Dealer (Open/Close)" />
+      <Button disable="true" layoutX="312.0" layoutY="132.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Rent Car" />
+      <Button disable="true" layoutX="313.0" layoutY="170.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Export from dealer" />
+      <Button disable="true" layoutX="313.0" layoutY="53.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="122.0" text="Create dealer" />
+      <Button disable="true" layoutX="337.0" layoutY="295.0" mnemonicParsing="false" text="Show dealer" />
+      <Button disable="true" layoutX="321.0" layoutY="210.0" mnemonicParsing="false" text="Show all inventory" />
+      <Button fx:id="test" disable="true" layoutX="308.0" layoutY="339.0" mnemonicParsing="false" text="Show dealers inventory" />
+   </children>
+</AnchorPane>
