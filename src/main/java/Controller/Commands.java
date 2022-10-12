@@ -223,26 +223,25 @@ public class Commands {
     }
 
     //display all dealers and all cars at each dealer
-    public void showAll() {
+    public String[] showAll() {
         outputMessage2 = "";
-        // old way
-        // for(int i = 0; i < listOfDealers.size(); i++){
-        // System.out.println(listOfDealers.get(i).getDealer_id());
-        // System.out.println("----------------------------------");
-        // for(Vehicle inv : listOfDealers.get(i).getListOfCarsAtDealer()){
-        // System.out.println(inv.getVehicle_id());
-        // }
-        // }
 
         //loops though list of dealers, prints the dealer id and the car id of the cars at the dealer
+
+        // create array to store dealer and car information
+        String[] dealerAndCarInfo = new String[listOfDealers.size() * 2];
+
         for (int i = 0; i < listOfDealers.size(); i++) {
-            System.out.println("\nDealerId: " + listOfDealers.get(i).getDealer_id());
-            System.out.println("----------------------------\n");
-            listOfDealers.get(i).getAllCarsID();
+            //add all cars to array
+            dealerAndCarInfo[i] = listOfDealers.get(i).toString();
+            //System.out.println("\nDealerId: " + listOfDealers.get(i).getDealer_id());
+            //System.out.println("----------------------------\n");
+            //listOfDealers.get(i).getAllCarsID();
         }
-        System.out.println("\n");
-        System.out.println("Any key to continue");
-        input.nextLine();
+        //System.out.println("\n");
+        //System.out.println("Any key to continue");
+        //input.nextLine();
+        return dealerAndCarInfo;
 
     }
 
