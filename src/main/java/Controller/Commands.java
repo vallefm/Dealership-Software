@@ -225,19 +225,11 @@ public class Commands {
     //display all dealers and all cars at each dealer
     public String[] showAll() {
         outputMessage2 = "";
-
         //loops though list of dealers, prints the dealer id and the car id of the cars at the dealer
-
         // create array to store dealer and car information
         String[] dealerAndCarInfo = new String[listOfDealers.size() * 2];
 
-        for (int i = 0; i < listOfDealers.size(); i++) {
-            //add all cars to array
-            dealerAndCarInfo[i] = listOfDealers.get(i).toString();
-            //System.out.println("\nDealerId: " + listOfDealers.get(i).getDealer_id());
-            //System.out.println("----------------------------\n");
-            //listOfDealers.get(i).getAllCarsID();
-        }
+        //dealerAndCarInfo = listOfDealers.get(0).toStringArray(); LIST OF DEALERS IS EMPTY
         //System.out.println("\n");
         //System.out.println("Any key to continue");
         //input.nextLine();

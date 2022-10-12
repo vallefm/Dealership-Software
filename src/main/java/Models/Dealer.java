@@ -47,11 +47,14 @@ public class Dealer {
         }
     }
 
-    public String toString () {
+    public String[] toStringArray () {
+        String[] arr = new String[876876];
+        int count = 0;
         for (Vehicle i : listOfCarsAtDealer) {
-            System.out.println("Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(i.getAcquisition_date()) + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model());
+            arr[count] = ("Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(i.getAcquisition_date()) + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model());
+            count++;
         }
-        return "";
+        return arr;
     }
 
     public Dealer(String id, boolean status) {

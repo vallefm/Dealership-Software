@@ -18,6 +18,8 @@ import javafx.util.Callback;
 import javax.imageio.IIOParam;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class GUIController implements Initializable {
@@ -29,17 +31,10 @@ public class GUIController implements Initializable {
 
     @FXML
     private ListView carList;
-
     @FXML
     private ObservableList<String> carList1 = FXCollections.observableArrayList();
 
     Commands cmds = new Commands();
-
-
-
-
-
-
 
 
     public void switchToEditScene(ActionEvent event) throws IOException {
@@ -67,15 +62,14 @@ public class GUIController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
-
     }
-
 
     public void loadList(ActionEvent event) throws IOException {
         String[] list = cmds.showAll();
-        System.out.println(list);
-        carList1.setAll(list);
+        for (String s : list) {
+            carList1.add(s);
+        }
+        //carList1.setAll(list);
         carList.setItems(carList1);
 
         }
