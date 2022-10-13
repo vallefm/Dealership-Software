@@ -10,8 +10,9 @@ public class Vehicle {
     private String vehicle_id;
     private int price;
     private long acquisition_date;
+    private boolean isRented;
 
-    public Vehicle(String dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, int price, long acquisition_date) {
+    public Vehicle(String dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, int price, long acquisition_date, boolean isRented) {
         this.dealership_id = dealership_id;
         this.vehicle_type = vehicle_type;
         this.vehicle_manufacturer = vehicle_manufacturer;
@@ -19,6 +20,7 @@ public class Vehicle {
         this.vehicle_id = vehicle_id;
         this.price = price;
         this.acquisition_date = acquisition_date;
+        this.isRented = isRented;
     }
 
     //this will set the dealership ID to whatever string is input for dealership_ID
@@ -55,6 +57,9 @@ public class Vehicle {
     public void setAcquisition_date(long acquisition_date) {
         this.acquisition_date = acquisition_date;
     }
+    //This will set the rented status of a vehicle
+    public void setIsRented (boolean isRented) { this.isRented = isRented;}
+
 
     public String getDealership_id() {
         return dealership_id;
@@ -83,5 +88,7 @@ public class Vehicle {
     public long getAcquisition_date() {
         return acquisition_date;
     }
+
+    public  boolean getIsRented() { return isRented;}
 
 }
