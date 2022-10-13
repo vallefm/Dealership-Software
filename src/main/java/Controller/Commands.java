@@ -18,7 +18,8 @@ import javax.swing.JFileChooser;
 public class Commands {
     JFileChooser fileChooser = new JFileChooser();
     JButton open = new JButton();
-    List<Dealer> listOfDealers = new ArrayList<>();
+    public static List<Dealer> listOfDealers = new ArrayList<>();
+    public List<Vehicle> listOfCars;
 
     Converters c = new Converters();
 
@@ -46,7 +47,7 @@ public class Commands {
 
         FileReader file = new FileReader(fileAbsolutePath);
 
-        List<Vehicle> listOfCars;
+
 
         //list of cars contains all cars read from json file
         listOfCars = c.fromJsonToInvArr(file);
@@ -223,17 +224,14 @@ public class Commands {
     }
 
     //display all dealers and all cars at each dealer
-    public String[] showAll() {
+    public List<Dealer> showAll() {
         outputMessage2 = "";
         //loops though list of dealers, prints the dealer id and the car id of the cars at the dealer
         // create array to store dealer and car information
-        String[] dealerAndCarInfo = new String[listOfDealers.size() * 2];
-
-        //dealerAndCarInfo = listOfDealers.get(0).toStringArray(); LIST OF DEALERS IS EMPTY
         //System.out.println("\n");
         //System.out.println("Any key to continue");
         //input.nextLine();
-        return dealerAndCarInfo;
+        return listOfDealers;
 
     }
 

@@ -1,5 +1,7 @@
 package view.dealership_software;
 import Controller.Commands;
+import Models.Dealer;
+import Models.Vehicle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +20,7 @@ import javafx.util.Callback;
 import javax.imageio.IIOParam;
 import java.io.IOException;
 import java.net.URL;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -32,7 +35,7 @@ public class GUIController implements Initializable {
     @FXML
     private ListView carList;
     @FXML
-    private ObservableList<String> carList1 = FXCollections.observableArrayList();
+    private ObservableList<Object> carList1 = FXCollections.observableArrayList();
 
     Commands cmds = new Commands();
 
@@ -65,11 +68,12 @@ public class GUIController implements Initializable {
     }
 
     public void loadList(ActionEvent event) throws IOException {
-        String[] list = cmds.showAll();
-        for (String s : list) {
-            carList1.add(s);
+        for (Dealer d : cmds.listOfDealers) {
+            for(Vehicle i: d.getListOfCarsAtDealer()){
+                carList1.add("Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(i.getAcquisition_date()) + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model());
+            }
+
         }
-        //carList1.setAll(list);
         carList.setItems(carList1);
 
         }
