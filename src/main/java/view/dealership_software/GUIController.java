@@ -70,7 +70,7 @@ public class GUIController implements Initializable {
     public void loadList(ActionEvent event) throws IOException {
         for (Dealer d : cmds.listOfDealers) {
             for(Vehicle i: d.getListOfCarsAtDealer()){
-                carList1.add("Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(i.getAcquisition_date()) + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model());
+                carList1.add("Dealer ID: " + i.getDealership_id()+" | Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(i.getAcquisition_date()) + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model());
             }
 
         }
