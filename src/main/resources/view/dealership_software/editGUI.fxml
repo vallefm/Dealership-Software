@@ -3,8 +3,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="496.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.dealership_software.GUIController">
+<AnchorPane prefHeight="261.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.dealership_software.GUIController">
     <children>
-        <Button layoutX="191.0" layoutY="128.0" mnemonicParsing="false" onAction="#switchToMainScene" text="CLick here lol" />
+        <Button layoutX="178.0" layoutY="182.0" mnemonicParsing="false" onAction="#switchToMainScene" text="3rd page, nos use at this time" />
     </children>
 </AnchorPane>
