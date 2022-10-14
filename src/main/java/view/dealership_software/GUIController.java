@@ -12,9 +12,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javax.imageio.IIOParam;
@@ -32,10 +30,35 @@ public class GUIController implements Initializable {
     private Parent root;
     private ActionEvent tempEvent;
 
+
+    //ListView is Car List, and Observable list is the input required to populate the listView
     @FXML
     private ListView carList;
     @FXML
     private ObservableList<Object> carList1 = FXCollections.observableArrayList();
+
+    //These are addCar textFields
+    @FXML
+    private TextField addCarMake;
+    @FXML
+    private TextField addCarModel;
+    @FXML
+    private TextField addCarDID;
+    @FXML
+    private TextField addCarID;
+    @FXML
+    private TextField addCarType;
+    @FXML
+    private TextField addCarPrice;
+    @FXML
+    private Button addCarButton;
+
+    private String carMake;
+    private String carModel;
+    private String carDID;
+    private String carID;
+    private String carType;
+    private String carPrice;
 
     Commands cmds = new Commands();
 
@@ -96,6 +119,16 @@ public class GUIController implements Initializable {
         stage.show();
     }
 
+    public void addCar(ActionEvent event) {
+        carMake = addCarMake.getText();
+        carModel = addCarModel.getText();
+        carDID = addCarDID.getText();
+        carID = addCarID.getText();
+        carType = addCarType.getText();
+        carPrice = addCarPrice.getText();
+        cmds.addCarGUI(carMake, carModel, carDID, carID, carType, carPrice);
+    }
+
 
     //exit program function
     public void exitProgram() {
@@ -107,4 +140,5 @@ public class GUIController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
+
 }

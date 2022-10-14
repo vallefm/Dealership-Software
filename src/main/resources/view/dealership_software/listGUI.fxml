@@ -17,11 +17,11 @@
       <Button layoutX="103.0" layoutY="481.0" mnemonicParsing="false" onAction="#switchToEditScene" text="Click here to add import JSON" />
       <Button layoutX="401.0" layoutY="481.0" mnemonicParsing="false" onAction="#loadList" prefHeight="25.0" prefWidth="106.0" text="RefreshList" />
       <ListView fx:id="carList" layoutX="37.0" layoutY="102.0" prefHeight="335.0" prefWidth="552.0" />
-      <Button layoutX="712.0" layoutY="270.0" mnemonicParsing="false" text="Save to Inventory" />
+      <Button fx:id="addCarButton" layoutX="712.0" layoutY="270.0" mnemonicParsing="false" onAction="#addCar" text="Save to Inventory" />
       <TextField fx:id="addCarDID" layoutX="692.0" layoutY="102.0" />
       <Label layoutX="623.0" layoutY="106.0" text="Dealer ID : " />
       <Label layoutX="638.0" layoutY="130.0" text="Car ID :" />
-      <TextField fx:id="adCarID" layoutX="692.0" layoutY="126.0" />
+      <TextField fx:id="addCarID" layoutX="692.0" layoutY="126.0" />
       <TextField fx:id="addCarPrice" layoutX="692.0" layoutY="151.0" />
       <TextField fx:id="addCarType" layoutX="692.0" layoutY="177.0" />
       <TextField fx:id="addCarMake" layoutX="692.0" layoutY="202.0" />

@@ -76,6 +76,32 @@ public class Commands {
     }
 
 
+    public void addCarGUI(String carMake, String carModel, String carDID, String carID, String carType, String carPrice)  {
+        for (int i = 0; i < listOfDealers.size(); i++) {
+
+            // If the vehicle acquisition status is false, dealer can't add cars
+            if (listOfDealers.get(i).getIsActivatedStatus() == true) {
+                    //find dealer to add vehicle too
+                if (carDID.equals(listOfDealers.get(i).getDealer_id())) {
+                    String vehicle_type = carType;
+                    String vehicle_manufacturer = carMake;
+                    String vehicle_model = carModel;
+                    String vehicle_id = carID;
+                    int vehicle_price = Integer.parseInt(carPrice);
+                    long acquisition_date = System.currentTimeMillis();
+                    Vehicle car = new Vehicle(carDID, vehicle_type, vehicle_manufacturer, vehicle_model, vehicle_id, vehicle_price, acquisition_date);
+                    listOfDealers.get(i).addToListOfCarsAtDealer(car);
+                }
+
+                }
+            else {
+                //pop up window saying dealer is not activated
+            }
+                }
+
+
+    }
+
     //takes user input to create a car object and put it into the users dealer of choice
     public void addCar() {
         outputMessage2 = "";
@@ -255,5 +281,6 @@ public class Commands {
     public String printMessage2() {
         return outputMessage2;
     }
+
 
 }
