@@ -6,12 +6,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="549.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.dealership_software.GUIController">   <children>
+<AnchorPane prefHeight="549.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GUIController">   <children>
       <Label layoutX="406.0" layoutY="96.0" text="Set car as loaned" AnchorPane.leftAnchor="406.0" AnchorPane.rightAnchor="405.6" />
       <TextField layoutX="376.0" layoutY="164.0" />
       <Label layoutX="335.0" layoutY="168.0" text="Car id:" />
       <RadioButton layoutX="421.0" layoutY="223.0" mnemonicParsing="false" text="Loaned" />
-      <Button layoutX="729.0" layoutY="40.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Return to main screen" />
+      <Button layoutX="729.0" layoutY="40.0" mnemonicParsing="false" onAction="#switchToMainMenuGUI" text="Return to main screen" />
       <Button layoutX="413.0" layoutY="312.0" mnemonicParsing="false" onAction="#exitProgram" text="Save &amp; Exit" />
    </children>
 </AnchorPane>

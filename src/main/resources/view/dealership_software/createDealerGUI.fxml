@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="549.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.dealership_software.GUIController">
+<AnchorPane prefHeight="549.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GUIController">
     <children>
         <Button layoutX="409.0" layoutY="468.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="25.0" prefWidth="85.0" text="Save &amp; Exit" />
       <Label layoutX="343.0" layoutY="41.0" text="Create Dealer">
@@ -18,6 +18,6 @@
       <Label layoutX="288.0" layoutY="175.0" text="New Dealer ID:" />
       <Button layoutX="397.0" layoutY="214.0" mnemonicParsing="false" text="Create this dealer" />
       <Button layoutX="671.0" layoutY="28.0" mnemonicParsing="false" onAction="#switchToDealerGUI" text="Return to Dealer menu" />
-      <Button layoutX="75.0" layoutY="28.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Return to Main Menu" />
+      <Button layoutX="75.0" layoutY="28.0" mnemonicParsing="false" onAction="#switchToMainMenuGUI" text="Return to Main Menu" />
     </children>
 </AnchorPane>

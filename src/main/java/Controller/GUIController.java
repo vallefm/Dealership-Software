@@ -1,4 +1,4 @@
-package view.dealership_software;
+package Controller;
 import Controller.Commands;
 import Models.Dealer;
 import Models.Vehicle;
@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import view.dealership_software.GUI;
 
 import java.io.IOException;
 import java.net.URL;
@@ -79,48 +80,53 @@ public class GUIController implements Initializable {
     Commands cmds = new Commands();
 
 
-    public void switchToMainMenuGUI(ActionEvent event) throws IOException {
+    public void readJson(ActionEvent event) throws IOException {
         cmds.readJSON();
-        Parent root = FXMLLoader.load(getClass().getResource("mainMenuGUI.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("mainMenuGUI.fxml"));
 //        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenuGUI.fxml"));
 //        loader.setController(this);
-        stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+//        stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();
+//        scene = new Scene(root);
+//        stage.setScene(scene);
+//        stage.show();
     }
 
     public void switchToCreateDealerGUI(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("createDealerGUI.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("createDealerGUI.fxml"));
+        FXMLLoader root = new FXMLLoader(GUI.class.getResource("createDealerGUI.fxml"));
         stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root.load());
         stage.setScene(scene);
         stage.show();
     }
 
     public void switchToDealerGUI(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("DealerGUI.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("DealerGUI.fxml"));
+        FXMLLoader root = new FXMLLoader(GUI.class.getResource("DealerGUI.fxml"));
         stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root.load());
         stage.setScene(scene);
         stage.show();
     }
-    public void switchToMainMenu(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("mainMenuGUI.fxml"));
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenuGUI.fxml"));
-        loader.setController(this);
+    public void switchToMainMenuGUI(ActionEvent event) throws IOException {
+//        Parent root = FXMLLoader.load(getClass().getResource("mainMenuGUI.fxml"));
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenuGUI.fxml"));
+//        loader.setController(this);
+        FXMLLoader root = new FXMLLoader(GUI.class.getResource("mainMenuGUI.fxml"));
         stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root.load());
         stage.setScene(scene);
         stage.show();
     }
 
     //////////////////////////////////////////////////////////////////////////////////////////////
     //switch to transfer window
-    public void switchToTransferPage(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("transferGUI.fxml"));
+    public void switchToTransferGUI(ActionEvent event) throws IOException {
+        //Parent root = FXMLLoader.load(getClass().getResource("transferGUI.fxml"));
+
+        FXMLLoader root = new FXMLLoader(GUI.class.getResource("transferGUI.fxml"));
         stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root.load());
         stage.setScene(scene);
         stage.show();
 
@@ -162,9 +168,10 @@ public class GUIController implements Initializable {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Loan out car window
     public void switchToLoanGUI(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("loanCarGUI.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("loanCarGUI.fxml"));
+        FXMLLoader root = new FXMLLoader(GUI.class.getResource("loanCarGUI.fxml"));
         stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
+        scene = new Scene(root.load());
         stage.setScene(scene);
         stage.show();
     }
