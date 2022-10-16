@@ -277,6 +277,49 @@ public class Commands {
         input.nextLine();
     }
 
+
+    //Transfer a car from fromDealer to toDealer
+    public int transferCar(String fromDealerID, String carID, String toDealerID){
+        //get list of dealer ids
+        List<String> dealerIds = new ArrayList<>();
+        for(Dealer dealer : listOfDealers){dealerIds.add(dealer.getDealer_id());}
+
+        //check if fromDealer exists in dealerIds
+        if(!dealerIds.contains(fromDealerID)){return 1;}
+        //check if toDealer exists in dealerIds
+        if(!dealerIds.contains(toDealerID)){return 3;}
+
+        //get dealer object from the fromDealerID
+        //get dealer object from the toDealerID
+        Dealer fromDealer = null;
+        Dealer toDealer = null;
+        for(Dealer dealer : listOfDealers){
+            if(dealer.getDealer_id().equals(fromDealerID)){
+                fromDealer = dealer;
+            }
+            if(dealer.getDealer_id().equals(toDealerID)){
+                toDealer = dealer;
+            }
+        }
+
+        //check if car exists at fromDealer
+        boolean carExists = false;
+        Vehicle tempV = null;
+        for(Vehicle v : fromDealer.getListOfCarsAtDealer()){
+            if (v.getVehicle_id().equals(carID)){
+                carExists = true;
+                tempV = v;
+            }
+        }
+        if(!carExists){return 2;}
+
+        //transfer car
+        fromDealer.getListOfCarsAtDealer().remove(tempV);
+        toDealer.getListOfCarsAtDealer().add(tempV);
+        tempV.setDealership_id(toDealerID);
+        return 0;
+    }
+
     //print commands the user can use
     public String printMessage2() {
         return outputMessage2;

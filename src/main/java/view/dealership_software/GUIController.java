@@ -53,6 +53,25 @@ public class GUIController implements Initializable {
     @FXML
     private Button addCarButton;
 
+    //////////////////////////////////////////////////////////////
+    //transferGUI
+    @FXML
+    private Label transfer_From_InvalidDealerID;
+    @FXML
+    private Label transfer_To_InvalidDealerID;
+    @FXML
+    private Label transfer_InvalidCarID;
+    @FXML
+    private Label transfer_Success;
+    @FXML
+    private TextField transfer_From_DealerID;
+    @FXML
+    private TextField transfer_To_DealerID;
+    @FXML
+    private TextField transfer_CarID;
+    @FXML
+    private Button transfer;
+/////////////////////////////////////////////////////////////////////////////////////////
 
     private String carMake;
     private String carModel;
@@ -100,12 +119,48 @@ public class GUIController implements Initializable {
         stage.show();
     }
 
-    public void switchToMainPage2(ActionEvent event) throws IOException {
+    //////////////////////////////////////////////////////////////////////////////////////////////
+    //switch to transfer window
+    public void switchToTransferPage(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("transferGUI.fxml"));
         stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+
+    }
+
+    public void transferCar(ActionEvent event){
+        String from = transfer_From_DealerID.getText();
+        String carID = transfer_CarID.getText();
+        String to = transfer_To_DealerID.getText();
+        int outcome = cmds.transferCar(from, carID, to);
+
+        //error / success message
+        if(outcome == 0){
+            transfer_Success.setVisible(true);
+            transfer_From_InvalidDealerID.setVisible(false);
+            transfer_InvalidCarID.setVisible(false);
+            transfer_To_InvalidDealerID.setVisible(false);
+        }
+        if(outcome == 1){
+            transfer_Success.setVisible(false);
+            transfer_From_InvalidDealerID.setVisible(true);
+            transfer_InvalidCarID.setVisible(false);
+            transfer_To_InvalidDealerID.setVisible(false);
+        }
+        if(outcome == 2){
+            transfer_Success.setVisible(false);
+            transfer_From_InvalidDealerID.setVisible(false);
+            transfer_InvalidCarID.setVisible(true);
+            transfer_To_InvalidDealerID.setVisible(false);
+        }
+        if(outcome == 3){
+            transfer_Success.setVisible(false);
+            transfer_From_InvalidDealerID.setVisible(false);
+            transfer_InvalidCarID.setVisible(false);
+            transfer_To_InvalidDealerID.setVisible(true);
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -117,6 +172,8 @@ public class GUIController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

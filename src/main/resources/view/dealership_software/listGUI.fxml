@@ -38,7 +38,7 @@
       <Button layoutX="260.0" layoutY="446.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="109.0" text="import XML" />
       <Button layoutX="39.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchToListGUI" text="Switch to dealer tab" />
       <Button layoutX="729.0" layoutY="446.0" mnemonicParsing="false" onAction="#exitProgram" text="Save &amp; Exit" />
-      <Button layoutX="744.0" layoutY="25.0" mnemonicParsing="false" onAction="#switchToMainPage2" text="Switch to transfer tab" />
+      <Button layoutX="744.0" layoutY="25.0" mnemonicParsing="false" onAction="#switchToTransferPage" text="Switch to transfer tab" />
       <Button layoutX="602.0" layoutY="25.0" mnemonicParsing="false" onAction="#switchToLoanGUI" text="Switch to loan tab" />
    </children>
 </AnchorPane>
