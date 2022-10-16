@@ -8,19 +8,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.util.Callback;
-import javax.imageio.IIOParam;
+
 import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class GUIController implements Initializable {
@@ -83,18 +79,18 @@ public class GUIController implements Initializable {
     Commands cmds = new Commands();
 
 
-    public void switchToEditScene(ActionEvent event) throws IOException {
+    public void switchToMainMenuGUI(ActionEvent event) throws IOException {
         cmds.readJSON();
         Parent root = FXMLLoader.load(getClass().getResource("mainMenuGUI.fxml"));
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenuGUI.fxml"));
-        loader.setController(this);
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenuGUI.fxml"));
+//        loader.setController(this);
         stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void switchToMainScene(ActionEvent event) throws IOException {
+    public void switchToCreateDealerGUI(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("createDealerGUI.fxml"));
         stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -102,7 +98,7 @@ public class GUIController implements Initializable {
         stage.show();
     }
 
-    public void switchToListGUI(ActionEvent event) throws IOException {
+    public void switchToDealerGUI(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("DealerGUI.fxml"));
         stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

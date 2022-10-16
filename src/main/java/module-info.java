@@ -7,4 +7,6 @@ module view.dealership_software {
 
     opens view.dealership_software to javafx.fxml;
     exports view.dealership_software;
+    exports Controller;
+    opens Controller to javafx.fxml;
 }

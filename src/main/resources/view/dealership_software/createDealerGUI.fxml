@@ -17,7 +17,7 @@
       <TextField layoutX="378.0" layoutY="171.0" />
       <Label layoutX="288.0" layoutY="175.0" text="New Dealer ID:" />
       <Button layoutX="397.0" layoutY="214.0" mnemonicParsing="false" text="Create this dealer" />
-      <Button layoutX="671.0" layoutY="28.0" mnemonicParsing="false" onAction="#switchToListGUI" text="Return to Dealer menu" />
+      <Button layoutX="671.0" layoutY="28.0" mnemonicParsing="false" onAction="#switchToDealerGUI" text="Return to Dealer menu" />
       <Button layoutX="75.0" layoutY="28.0" mnemonicParsing="false" onAction="#switchToMainMenu" text="Return to Main Menu" />
     </children>
 </AnchorPane>
