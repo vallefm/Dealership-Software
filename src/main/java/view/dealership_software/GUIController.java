@@ -99,6 +99,14 @@ public class GUIController implements Initializable {
         stage.show();
     }
 
+    public void switchToMainPage2(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("transferGUI.fxml"));
+        stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void loadList(ActionEvent event) throws IOException {
         for (Dealer d : cmds.listOfDealers) {
             for(Vehicle i: d.getListOfCarsAtDealer()){

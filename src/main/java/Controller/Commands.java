@@ -75,7 +75,7 @@ public class Commands {
 
     }
 
-
+//NEED TO ADD RESTRICTIONS TO INPUTS NEEDS TO CHANGE FOR IMPORTING A FILE AS WELL
     public void addCarGUI(String carMake, String carModel, String carDID, String carID, String carType, String carPrice)  {
         for (int i = 0; i < listOfDealers.size(); i++) {
 
