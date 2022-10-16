@@ -12,7 +12,7 @@ public class GUI extends Application {
     @Override
     public void start(Stage mainWindow) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("listGUI.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("mainMenuGUI.fxml"));
         Scene scene =  new Scene(root);
         mainWindow.setScene(scene);
         mainWindow.show();
