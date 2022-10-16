@@ -29,5 +29,6 @@
       <Button layoutX="103.0" layoutY="358.0" mnemonicParsing="false" onAction="#switchToMainScene" text="Export this dealer to JSON" />
       <Button layoutX="413.0" layoutY="490.0" mnemonicParsing="false" text="Save &amp; Exit" />
       <Button layoutX="120.0" layoutY="465.0" mnemonicParsing="false" text="Show all Dealers" />
+      <Button layoutX="67.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchToMainScene" text="Swtch to add dealer" />
    </children>
 </AnchorPane>
