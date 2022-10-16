@@ -53,6 +53,7 @@ public class GUIController implements Initializable {
     @FXML
     private Button addCarButton;
 
+
     private String carMake;
     private String carModel;
     private String carDID;
@@ -106,6 +107,18 @@ public class GUIController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Loan out car window
+    public void switchToLoanGUI(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("loanCarGUI.fxml"));
+        stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void loadList(ActionEvent event) throws IOException {
         for (Dealer d : cmds.listOfDealers) {
