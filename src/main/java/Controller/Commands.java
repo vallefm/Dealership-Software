@@ -154,10 +154,10 @@ public class Commands {
     }
 
     //set dealer to no longer accept new incoming vehicles
-    public void dealerOff() {
-        outputMessage2 = "";
-        System.out.println("Enter the dealer id of the dealership: ");
-        String dealerId = input.nextLine();
+    public void dealerOff(String dealer_ID) {
+        //outputMessage2 = "";
+        //System.out.println("Enter the dealer id of the dealership: ");
+        String dealerId = dealer_ID;
 
         for (int i = 0; i < listOfDealers.size(); i++) {
             if (dealerId.equals(listOfDealers.get(i).getDealer_id())) {
@@ -171,8 +171,8 @@ public class Commands {
         if(dealershipIDFound == false){
             System.out.println("Dealership ID " + dealerId + " does not exist.\n");
 
-            System.out.println("Press enter to continue");
-            input.nextLine();
+            //System.out.println("Press enter to continue");
+            //input.nextLine();
         }
 
         //resets dealershipIDFound
@@ -180,13 +180,14 @@ public class Commands {
     }
 
     //set dealer to accept new incoming vehicles
-    public void dealerOn() {
-        outputMessage2 = "";
-        System.out.println("Enter the dealer id of the dealership: ");
-        String idString = input.nextLine();
+    //CHANGED TO TAKE STRING AS INPUT TO BE USED WITH GUI
+    public void dealerOn(String dealer_ID) {
+        //outputMessage2 = "";
+        //System.out.println("Enter the dealer id of the dealership: ");
+        //String idString = input.nextLine();
 
         for (int i = 0; i < listOfDealers.size(); i++) {
-            if (idString.equals(listOfDealers.get(i).getDealer_id())) {
+            if (dealer_ID.equals(listOfDealers.get(i).getDealer_id())) {
                 listOfDealers.get(i).setIsActivatedStatus(true);
 
                 dealershipIDFound = true;
@@ -194,10 +195,10 @@ public class Commands {
         }
 
         if(dealershipIDFound == false){
-            System.out.println("Dealership ID " + idString + " does not exist.\n");
+            System.out.println("Dealership ID " + dealer_ID + " does not exist.\n");
 
-            System.out.println("Press enter to continue");
-            input.nextLine();
+            //System.out.println("Press enter to continue");
+            //input.nextLine();
         }
 
         //resets dealershipIDFound

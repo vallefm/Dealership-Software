@@ -57,6 +57,20 @@ public class Dealer {
         return arr;
     }
 
+    public String getID(){
+        return dealer_id;
+    }
+
+    public String getActivatedStatus(){
+        if(isActivated){
+            return "Activated";
+        }
+        else{
+            return "Deactivated";
+        }
+    }
+
+
     public Dealer(String id, boolean status) {
         dealer_id = id;
         isActivated = status;

@@ -38,10 +38,10 @@ public class UI {
                     cmds.addCar();
                     break;
                 case "dealeroff":
-                    cmds.dealerOff();
+                    //cmds.dealerOff();
                     break;
                 case "dealeron":
-                    cmds.dealerOn();
+                    //cmds.dealerOn();
                     break;
                 case "showlist":
                     cmds.showList();

@@ -32,7 +32,11 @@ public class GUIController implements Initializable {
     @FXML
     private ListView carList;
     @FXML
+    private ListView dealerList;
+    @FXML
     private ObservableList<Object> carList1 = FXCollections.observableArrayList();
+    @FXML
+    private ObservableList<Object> dealerList1 = FXCollections.observableArrayList();
 
     //These are addCar textFields
     @FXML
@@ -68,6 +72,8 @@ public class GUIController implements Initializable {
     private TextField transfer_CarID;
     @FXML
     private Button transfer;
+    @FXML
+    private TextField DealerIDField;
 /////////////////////////////////////////////////////////////////////////////////////////
 
     private String carMake;
@@ -196,6 +202,19 @@ public class GUIController implements Initializable {
 
         }
 
+    public void loadDealerList(ActionEvent event) throws IOException {
+        for (Dealer d : cmds.listOfDealers) {
+            boolean b = dealerList1.contains("Dealer ID: " + d.getDealer_id());
+            if (b == false){
+                //This boolean serves to make sure that we do not add duplicates to list
+                dealerList1.add("Dealer ID: " + d.getDealer_id());
+            }
+
+            dealerList.setItems(dealerList1);
+
+        }
+    }
+
     private void refreshList(ActionEvent event) {
         Parent root = null;
         try {
@@ -209,6 +228,7 @@ public class GUIController implements Initializable {
         stage.show();
     }
 
+
     public void addCar(ActionEvent event) {
         carMake = addCarMake.getText();
         carModel = addCarModel.getText();
@@ -217,6 +237,15 @@ public class GUIController implements Initializable {
         carType = addCarType.getText();
         carPrice = addCarPrice.getText();
         cmds.addCarGUI(carMake, carModel, carDID, carID, carType, carPrice);
+    }
+
+    public void dealerOn(ActionEvent event) {
+        String dealerID = DealerIDField.getText();
+        cmds.dealerOn(dealerID);
+    }
+    public void dealerOff(ActionEvent event) {
+        String dealerID = DealerIDField.getText();
+        cmds.dealerOff(dealerID);
     }
 
 

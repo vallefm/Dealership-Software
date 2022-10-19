@@ -14,12 +14,12 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Button layoutX="127.0" layoutY="317.0" mnemonicParsing="false" text="Set dealer to OFF" />
+      <Button layoutX="127.0" layoutY="317.0" mnemonicParsing="false" onAction="#dealerOff" text="Set dealer to OFF" />
       <Button layoutX="703.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchToMainMenuGUI" text="Return to main menu" />
-      <TextField layoutX="105.0" layoutY="193.0" />
+      <TextField fx:id="DealerIDField" layoutX="105.0" layoutY="193.0" />
       <Label layoutX="15.0" layoutY="197.0" text="Enter dealer ID :" />
-      <Button layoutX="128.0" layoutY="279.0" mnemonicParsing="false" text="Set dealer to ON" />
-      <ListView layoutX="317.0" layoutY="109.0" prefHeight="339.0" prefWidth="522.0" />
+      <Button layoutX="128.0" layoutY="279.0" mnemonicParsing="false" onAction="#dealerOn" text="Set dealer to ON" />
+      <ListView fx:id="dealerList" layoutX="317.0" layoutY="109.0" prefHeight="339.0" prefWidth="522.0" />
       <Button layoutX="93.0" layoutY="238.0" mnemonicParsing="false" text="Show Inventory for this dealer" />
       <Label layoutX="406.0" layoutY="123.0">
          <font>
@@ -30,5 +30,6 @@
       <Button layoutX="413.0" layoutY="490.0" mnemonicParsing="false" text="Save &amp; Exit" />
       <Button layoutX="120.0" layoutY="465.0" mnemonicParsing="false" text="Show all Dealers" />
       <Button layoutX="67.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchToCreateDealerGUI" text="Swtch to add dealer" />
+      <Button fx:id="refreshDealer" layoutX="703.0" layoutY="490.0" mnemonicParsing="false" onAction="#loadDealerList" text="Refresh List" />
    </children>
 </AnchorPane>
