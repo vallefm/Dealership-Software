@@ -60,10 +60,6 @@ public class Dealer {
         return arr;
     }
 
-    public String getID(){
-        return dealer_id;
-    }
-
     public String getName(){ return dealer_name; }
 
     public String getActivatedStatus(){

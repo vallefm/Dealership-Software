@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -25,15 +26,15 @@ import javax.xml.parsers.ParserConfigurationException;
 
 public class Converters {
 
-    //Commands cmds = new Commands();
-
-    public List fromXmlToArr(File xml) throws ParserConfigurationException, IOException, SAXException {
-
+    public List<Dealer> fromXmlToArr(File xml) throws ParserConfigurationException, IOException, SAXException {
+        List<Dealer> listOfDealers = new ArrayList<>();
         ArrayList<String> allowedVehicles = new ArrayList<>();
         allowedVehicles.add("suv");
         allowedVehicles.add("pickup");
         allowedVehicles.add("sports car");
         allowedVehicles.add("sedan");
+
+        HashMap<String,String> dealersNames = new HashMap<>();
 
         ArrayList<Vehicle> cars = new ArrayList<>();
 
@@ -70,7 +71,11 @@ public class Converters {
                 String unit = element.getElementsByTagName("Price").item(0).getAttributes().getNamedItem("unit").getTextContent();
                 if(node.getParentNode().getNodeType() == Node.ELEMENT_NODE){
                     Element parentElement = (Element) node.getParentNode();
-                    dName = parentElement.getElementsByTagName("Name").item(0).getTextContent();
+                    if(parentElement.getElementsByTagName("Name").getLength() > 0){
+                        dName = parentElement.getElementsByTagName("Name").item(0).getTextContent();
+                        dealersNames.put(dId, dName);
+                    }
+
                 }
 
 
@@ -87,11 +92,10 @@ public class Converters {
 
                     //Need a company class to store listOfDealers
 //                    if(dName != null){
-//                        car.getDealership_id();
 //                        if(!cmds.listOfDealers.isEmpty()){
 //                            for(Dealer d : cmds.listOfDealers){
-//                                if(d.getDealer_id() == car.getDealership_id()){
-//                                    if(d.getName() == ""){
+//                                if(d.getDealer_id().equals(dId)){
+//                                    if(d.getName().equals("")){
 //                                        d.setName(dName);
 //                                    }
 //                                }
@@ -111,13 +115,42 @@ public class Converters {
             }
         }
 
+        // if listOfDealers is empty, add the dealer of the first car in listOfCars to
+        // listOfDealers
+        if (listOfDealers.size() == 0 && cars.size() > 0) {
+            Dealer d = new Dealer(cars.get(0).getDealership_id(), true);
+            d.setName(dealersNames.get(d.getDealer_id()));
+            listOfDealers.add(d);
+        }
+        // put cars from json file into dealers
+        // create new dealer if car's dealership_id does not match any existing dealers
+        for(Vehicle car : cars) {
+            for(Dealer d : listOfDealers) {
+                if(car.getDealership_id() != d.getDealer_id()){
+                    listOfDealers.add(new Dealer(car.getDealership_id(), true));
+                    d.addToListOfCarsAtDealer(car);
+                }
+            }
+        }
+
+        for(Vehicle car : cars) {
+            Dealer dealer = listOfDealers.stream().filter(d -> d.getDealer_id().equals(car.getDealership_id())).findFirst().orElse(null);
+                if( dealer == null ) {
+                    dealer = new Dealer(car.getDealership_id(), true);
+                    dealer.setName(dealersNames.get(dealer.getDealer_id()));
+                    listOfDealers.add(dealer);
+                }
+                    dealer.addToListOfCarsAtDealer(car);
+            }
+
+
 
         //Once done
-        return cars;
+        return listOfDealers;
 
     }
-    public List<Vehicle> fromJsonToInvArr(FileReader json) {
-
+    public List<Dealer> fromJsonToInvArr(FileReader json) {
+        List<Dealer> listOfDealers = new ArrayList<>();
 
         JsonObject obj = JsonParser.parseReader(json).getAsJsonObject();
 
@@ -164,7 +197,7 @@ public class Converters {
             }
 
         }
-        return cars;
+        return listOfDealers;
     }
 
     //this method takes an input Dealer such as a dealership and then it converts the list of vehicles for that Dealer into a .json file into your D:\ drive

@@ -24,7 +24,7 @@ public class Commands {
     JFileChooser fileChooser = new JFileChooser();
 
     JButton open = new JButton();
-    public static List<Dealer> listOfDealers = new ArrayList<>();
+    public List<Dealer> listOfDealers = new ArrayList<>();
     public List<Vehicle> listOfCars;
 
     Converters c = new Converters();
@@ -58,33 +58,11 @@ public class Commands {
         //list of cars contains all cars read from json file
         if(fileAbsolutePath.contains(".xml")){
             File file = new File(fileAbsolutePath);
-            listOfCars = c.fromXmlToArr(file);
+            listOfDealers = c.fromXmlToArr(file);
         }
         else{
             FileReader file = new FileReader(fileAbsolutePath);
-            listOfCars = c.fromJsonToInvArr(file);
-        }
-
-
-        // if listOfDealers is empty, add the dealer of the first car in listOfCars to
-        // listOfDealers
-        if (listOfDealers.size() == 0 && listOfCars.size() > 0) {
-            listOfDealers.add(new Dealer(listOfCars.get(0).getDealership_id(), true));
-        }
-        // put cars from json file into dealers
-        // create new dealer if car's dealership_id does not match any existing dealers
-        for (Vehicle car : listOfCars) {
-            for (int i = 0; i < listOfDealers.size(); i++) {
-                Dealer dealer = listOfDealers.get(i);
-                if (car.getDealership_id().equals(dealer.getDealer_id())) {
-                    dealer.addToListOfCarsAtDealer(car);
-                    break;
-                }
-                if (dealer == listOfDealers.get(listOfDealers.size() - 1)) {
-                    listOfDealers.add(new Dealer(car.getDealership_id(), true));
-                }
-
-            }
+            listOfDealers = c.fromJsonToInvArr(file);
         }
 
     }
