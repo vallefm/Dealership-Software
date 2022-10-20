@@ -13,8 +13,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.xml.sax.SAXException;
 import view.dealership_software.GUI;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
@@ -86,7 +88,7 @@ public class GUIController implements Initializable {
     Commands cmds = new Commands();
 
 
-    public void readJson(ActionEvent event) throws IOException {
+    public void readJson(ActionEvent event) throws IOException, ParserConfigurationException, SAXException {
         cmds.readJSON();
 //        Parent root = FXMLLoader.load(getClass().getResource("mainMenuGUI.fxml"));
 //        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainMenuGUI.fxml"));

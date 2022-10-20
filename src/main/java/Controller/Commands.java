@@ -1,14 +1,19 @@
 package Controller;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import Models.Vehicle;
 import Models.Dealer;
+import org.xml.sax.SAXException;
+
 import javax.swing.*;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.xml.parsers.ParserConfigurationException;
 
 
 // This class has a list of methods called commands, that are called from UI class. Each method will perform a specific task.
@@ -17,6 +22,7 @@ import javax.swing.JFileChooser;
 
 public class Commands {
     JFileChooser fileChooser = new JFileChooser();
+
     JButton open = new JButton();
     public static List<Dealer> listOfDealers = new ArrayList<>();
     public List<Vehicle> listOfCars;
@@ -32,7 +38,7 @@ public class Commands {
     //reads User selected json and put cars into their corresponding dealer.
     //if a car from a dealer that is not yet created is read, the dealer is created, and
     //the car is stored in it
-    public void readJSON() throws FileNotFoundException {
+    public void readJSON() throws IOException, ParserConfigurationException, SAXException {
 
         fileChooser.setCurrentDirectory(new java.io.File("C:/Users"));
         // Titles the text box
@@ -45,12 +51,20 @@ public class Commands {
 
         outputMessage2 = "The file you chose to read: " + fileAbsolutePath + ".\n";
 
-        FileReader file = new FileReader(fileAbsolutePath);
+
 
 
 
         //list of cars contains all cars read from json file
-        listOfCars = c.fromJsonToInvArr(file);
+        if(fileAbsolutePath.contains(".xml")){
+            File file = new File(fileAbsolutePath);
+            listOfCars = c.fromXmlToArr(file);
+        }
+        else{
+            FileReader file = new FileReader(fileAbsolutePath);
+            listOfCars = c.fromJsonToInvArr(file);
+        }
+
 
         // if listOfDealers is empty, add the dealer of the first car in listOfCars to
         // listOfDealers
