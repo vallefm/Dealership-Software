@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="549.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GUIController">
+<AnchorPane prefHeight="549.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GUIControllers.mainMenuGUIController">
    <children>
       <Label fx:id="showDealerLabel" alignment="CENTER" layoutX="154.0" layoutY="38.0" prefHeight="31.0" prefWidth="320.0" text="Company Inventory">
          <font>

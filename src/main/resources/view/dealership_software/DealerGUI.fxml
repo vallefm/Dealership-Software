@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="549.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GUIController">
+<AnchorPane prefHeight="549.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GUIControllers.dealerGUIController">
    <children>
       <Label layoutX="400.0" layoutY="29.0" text="Dealer">
          <font>
@@ -27,9 +27,9 @@
          </font>
       </Label>
       <Button layoutX="103.0" layoutY="358.0" mnemonicParsing="false" text="Export this dealer to JSON" />
-      <Button layoutX="413.0" layoutY="490.0" mnemonicParsing="false" text="Save &amp; Exit" />
+      <Button layoutX="413.0" layoutY="490.0" mnemonicParsing="false" onAction="#exitProgram" text="Save &amp; Exit" />
       <Button layoutX="120.0" layoutY="465.0" mnemonicParsing="false" text="Show all Dealers" />
       <Button layoutX="67.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchToCreateDealerGUI" text="Swtch to add dealer" />
-      <Button fx:id="refreshDealer" layoutX="703.0" layoutY="490.0" mnemonicParsing="false" onAction="#loadDealerList" text="Refresh List" />
+      <Button fx:id="refreshDealer" layoutX="703.0" layoutY="490.0" mnemonicParsing="false" onAction="#refreshList" text="Refresh List" />
    </children>
 </AnchorPane>

@@ -9,4 +9,6 @@ module view.dealership_software {
     exports view.dealership_software;
     exports Controller;
     opens Controller to javafx.fxml;
+    exports Controller.GUIControllers;
+    opens Controller.GUIControllers to javafx.fxml;
 }
