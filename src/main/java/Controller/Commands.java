@@ -24,7 +24,7 @@ public class Commands {
     JFileChooser fileChooser = new JFileChooser();
 
     JButton open = new JButton();
-    public List<Dealer> listOfDealers = new ArrayList<>();
+    public static List<Dealer> listOfDealers = new ArrayList<>();
     public List<Vehicle> listOfCars;
 
     Converters c = new Converters();
@@ -58,22 +58,44 @@ public class Commands {
         //list of cars contains all cars read from json file
         if(fileAbsolutePath.contains(".xml")){
             File file = new File(fileAbsolutePath);
-            listOfDealers = c.fromXmlToArr(file);
+            listOfCars = c.fromXmlToArr(file);
         }
         else{
             FileReader file = new FileReader(fileAbsolutePath);
-            listOfDealers = c.fromJsonToInvArr(file);
+            listOfCars = c.fromJsonToInvArr(file);
+        }
+
+
+        // if listOfDealers is empty, add the dealer of the first car in listOfCars to
+        // listOfDealers
+        if (listOfDealers.size() == 0 && listOfCars.size() > 0) {
+            listOfDealers.add(new Dealer(listOfCars.get(0).getDealership_id(), true));
+        }
+        // put cars from json file into dealers
+        // create new dealer if car's dealership_id does not match any existing dealers
+        for (Vehicle car : listOfCars) {
+            for (int i = 0; i < listOfDealers.size(); i++) {
+                Dealer dealer = listOfDealers.get(i);
+                if (car.getDealership_id().equals(dealer.getDealer_id())) {
+                    dealer.addToListOfCarsAtDealer(car);
+                    break;
+                }
+                if (dealer == listOfDealers.get(listOfDealers.size() - 1)) {
+                    listOfDealers.add(new Dealer(car.getDealership_id(), true));
+                }
+
+            }
         }
 
     }
 
-//NEED TO ADD RESTRICTIONS TO INPUTS NEEDS TO CHANGE FOR IMPORTING A FILE AS WELL
+    //NEED TO ADD RESTRICTIONS TO INPUTS NEEDS TO CHANGE FOR IMPORTING A FILE AS WELL
     public void addCarGUI(String carMake, String carModel, String carDID, String carID, String carType, String carPrice)  {
         for (int i = 0; i < listOfDealers.size(); i++) {
 
             // If the vehicle acquisition status is false, dealer can't add cars
             if (listOfDealers.get(i).getIsActivatedStatus() == true) {
-                    //find dealer to add vehicle too
+                //find dealer to add vehicle too
                 if (carDID.equals(listOfDealers.get(i).getDealer_id())) {
                     String vehicle_type = carType;
                     String vehicle_manufacturer = carMake;
@@ -85,11 +107,11 @@ public class Commands {
                     listOfDealers.get(i).addToListOfCarsAtDealer(car);
                 }
 
-                }
+            }
             else {
                 //pop up window saying dealer is not activated
             }
-                }
+        }
 
 
     }
@@ -272,25 +294,40 @@ public class Commands {
 
 
     //Transfer a car from fromDealer to toDealer
-    public int transferCar(String fromDealerID, String carID, String toDealerID){
+    public boolean[] transferCar(String fromDealerID, String carID, String toDealerID) {
+
+        //This will be return to determine what error or success message are displayed
+        boolean[] outcome = {false, false, false, false};
+
         //get list of dealer ids
         List<String> dealerIds = new ArrayList<>();
-        for(Dealer dealer : listOfDealers){dealerIds.add(dealer.getDealer_id());}
+        for (Dealer dealer : listOfDealers) {
+            dealerIds.add(dealer.getDealer_id());
+        }
 
         //check if fromDealer exists in dealerIds
-        if(!dealerIds.contains(fromDealerID)){return 1;}
+        if (!dealerIds.contains(fromDealerID)) {
+            outcome[1] = true;
+        }
         //check if toDealer exists in dealerIds
-        if(!dealerIds.contains(toDealerID)){return 3;}
+        if (!dealerIds.contains(toDealerID)) {
+            outcome[3] = true;
+        }
+
+        //if fromDealer or toDealer do not exist return
+        if (outcome[1] || outcome[3]) {
+            return outcome;
+        }
 
         //get dealer object from the fromDealerID
         //get dealer object from the toDealerID
         Dealer fromDealer = null;
         Dealer toDealer = null;
-        for(Dealer dealer : listOfDealers){
-            if(dealer.getDealer_id().equals(fromDealerID)){
+        for (Dealer dealer : listOfDealers) {
+            if (dealer.getDealer_id().equals(fromDealerID)) {
                 fromDealer = dealer;
             }
-            if(dealer.getDealer_id().equals(toDealerID)){
+            if (dealer.getDealer_id().equals(toDealerID)) {
                 toDealer = dealer;
             }
         }
@@ -298,19 +335,26 @@ public class Commands {
         //check if car exists at fromDealer
         boolean carExists = false;
         Vehicle tempV = null;
-        for(Vehicle v : fromDealer.getListOfCarsAtDealer()){
-            if (v.getVehicle_id().equals(carID)){
+        for (Vehicle v : fromDealer.getListOfCarsAtDealer()) {
+            if (v.getVehicle_id().equals(carID)) {
                 carExists = true;
                 tempV = v;
             }
         }
-        if(!carExists){return 2;}
+
+        //if the carID is not found in the fromDealer, return
+        if (!carExists) {
+            outcome[2] = true;
+            return outcome;
+        }
 
         //transfer car
         fromDealer.getListOfCarsAtDealer().remove(tempV);
         toDealer.getListOfCarsAtDealer().add(tempV);
         tempV.setDealership_id(toDealerID);
-        return 0;
+        outcome[0] = true;
+
+        return outcome;
     }
 
     //print commands the user can use
