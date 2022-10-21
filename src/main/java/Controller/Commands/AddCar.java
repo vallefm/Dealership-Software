@@ -39,9 +39,9 @@ public class AddCar {
         boolean invalid_dealerID = false;
         boolean invalid_DealerClosed = false;
         boolean invalid_carID = false;
-        boolean invalid_Type = false;
+        //boolean invalid_Type = false;
         boolean success = false;
-        boolean[] outcome = {invalid_dealerID, invalid_DealerClosed, invalid_carID, invalid_Type, success};
+        boolean[] outcome = {invalid_dealerID, invalid_DealerClosed, invalid_carID, success};
 
         //find if dealer exists
         Dealer dealer = null;
@@ -69,6 +69,7 @@ public class AddCar {
             }
         }
         //if type is not legal error
+        /*
         ArrayList<String> allowedVehicles = new ArrayList<>();
         allowedVehicles.add("suv");
         allowedVehicles.add("pickup");
@@ -77,6 +78,8 @@ public class AddCar {
         if(!allowedVehicles.contains(carType)){
             outcome[3] = true;
         }
+        */
+
 
         //if there is an error return
         for(int i = 0; i < outcome.length - 1; i++){

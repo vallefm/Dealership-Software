@@ -1,6 +1,7 @@
 package Controller.GUIControllers;
 
 import Controller.CommandManager;
+import Controller.Commands.AddCar;
 import Models.Company;
 import Models.Dealer;
 import Models.Vehicle;
@@ -12,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -23,6 +25,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 public class mainMenuGUIController implements Initializable {
@@ -51,6 +55,9 @@ public class mainMenuGUIController implements Initializable {
     @FXML
     private Label success;
 
+    @FXML
+    private ChoiceBox<String> addCarTypeChoiceBox;
+
 
    //list
     @FXML
@@ -69,12 +76,12 @@ public class mainMenuGUIController implements Initializable {
         String carModel = addCarModel.getText();
         String carDID = addCarDID.getText();
         String carID = addCarID.getText();
-        String carType = addCarType.getText();
+        String carType = addCarTypeChoiceBox.getValue();
         String carPrice = addCarPrice.getText();
         boolean[] outcome = cmds.addCarGUI(carMake, carModel, carDID, carID, carType, carPrice);
 
         //set error / success label to not visible
-        invalid_Type.setVisible(false);
+        //invalid_Type.setVisible(false);
         invalid_CarID.setVisible(false);
         invalid_DealerID.setVisible(false);
         success.setVisible(false);
@@ -145,5 +152,15 @@ public class mainMenuGUIController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+        //List of allowed cars
+        ArrayList<String> allowedCarType = new ArrayList<>();
+        allowedCarType.add("SUV");
+        allowedCarType.add("Sedan");
+        allowedCarType.add("Pick up");
+        allowedCarType.add("Sports car");
+
+
+        //Populate the carTypeChoiceBox with allowed vehicle type
+        addCarTypeChoiceBox.getItems().addAll(allowedCarType);
     }
 }
