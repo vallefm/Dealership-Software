@@ -1,6 +1,6 @@
 package Controller.GUIControllers;
 
-import Controller.Commands;
+import Controller.CommandManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -38,7 +38,7 @@ public class transferGUIController implements Initializable {
     @FXML
     private TextField DealerIDField;
 
-    Commands cmds = new Commands();
+    CommandManager cmds = new CommandManager();
 
     public void transferCar(ActionEvent event) {
         String from = transfer_From_DealerID.getText();

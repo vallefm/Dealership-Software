@@ -1,6 +1,6 @@
 package Controller.GUIControllers;
 
-import Controller.Commands;
+import Controller.CommandManager;
 import Models.Company;
 import Models.Dealer;
 import Models.Vehicle;
@@ -30,7 +30,7 @@ public class loanCarGUIController implements Initializable {
     private Label invalidCarID;
 
     private Vehicle currentVehicle;
-    private Commands cmds = new Commands();
+    private CommandManager cmds = new CommandManager();
 
     public void search(ActionEvent event) throws IOException{
 

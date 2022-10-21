@@ -1,6 +1,6 @@
 package Controller.GUIControllers;
 
-import Controller.Commands;
+import Controller.CommandManager;
 import Models.Company;
 import Models.Dealer;
 import Models.Vehicle;
@@ -58,7 +58,7 @@ public class mainMenuGUIController implements Initializable {
     @FXML
     private ListView carList;
 
-    private Commands cmds = new Commands();
+    private CommandManager cmds = new CommandManager();
 
     public void readJson(ActionEvent event) throws IOException, ParserConfigurationException, SAXException {
         cmds.readJSON();

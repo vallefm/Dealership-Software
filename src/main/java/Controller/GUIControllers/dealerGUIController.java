@@ -1,6 +1,7 @@
 package Controller.GUIControllers;
 
-import Controller.Commands;
+
+import Controller.CommandManager;
 import Models.Company;
 import Models.Dealer;
 import javafx.collections.FXCollections;
@@ -28,7 +29,7 @@ public class dealerGUIController implements Initializable {
     private ObservableList<Object> dealerList1 = FXCollections.observableArrayList();
     @FXML
     private ListView dealerList;
-    private Commands cmds = new Commands();
+    private CommandManager cmds = new CommandManager();
 
     public void dealerOn(ActionEvent event) {
         String dealerID = DealerIDField.getText();

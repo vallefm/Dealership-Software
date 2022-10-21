@@ -13,23 +13,23 @@ import javax.xml.parsers.ParserConfigurationException;
 public class CommandManager {
 
     public void readJSON() throws IOException, ParserConfigurationException, SAXException {
-        ReadJSON command = new ReadJSON();
+        Controller.CommandsPkg.ReadJSON command = new Controller.CommandsPkg.ReadJSON();
         command.readJSON();
     }
     public void dealerOff(String dealerID){
-        DealerOff command = new DealerOff();
+        Controller.CommandsPkg.DealerOff command = new Controller.CommandsPkg.DealerOff();
         command.dealerOff(dealerID);
     }
     public void dealerOn(String dealerID){
-        DealerOn command = new DealerOn();
+        Controller.CommandsPkg.DealerOn command = new Controller.CommandsPkg.DealerOn();
         command.dealerOn(dealerID);
     }
     public boolean[] addCarGUI(String carMake, String carModel, String carDID, String carID, String carType, String carPrice){
-        AddCar command = new AddCar();
+        Controller.CommandsPkg.AddCar command = new Controller.CommandsPkg.AddCar();
         return command.addCarGUI(carMake, carModel, carDID, carID, carType, carPrice);
     }
     public boolean[] transferCar(String fromDealer, String carID, String toDealer){
-        TransferCar command = new TransferCar();
+        Controller.CommandsPkg.TransferCar command = new Controller.CommandsPkg.TransferCar();
         return command.transferCar(fromDealer, carID, toDealer);
     }
 
