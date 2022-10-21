@@ -58,11 +58,11 @@ public class Commands {
         //list of cars contains all cars read from json file
         if(fileAbsolutePath.contains(".xml")){
             File file = new File(fileAbsolutePath);
-            listOfCars = c.fromXmlToArr(file);
+            listOfDealers = c.fromXmlToArr(file);
         }
         else{
             FileReader file = new FileReader(fileAbsolutePath);
-            listOfCars = c.fromJsonToInvArr(file);
+            listOfDealers = c.fromJsonToInvArr(file);
         }
 
 
