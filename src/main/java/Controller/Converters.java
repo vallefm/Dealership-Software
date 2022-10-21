@@ -124,14 +124,14 @@ public class Converters {
         }
         // put cars from json file into dealers
         // create new dealer if car's dealership_id does not match any existing dealers
-        for(Vehicle car : cars) {
-            for(Dealer d : listOfDealers) {
-                if(car.getDealership_id() != d.getDealer_id()){
-                    listOfDealers.add(new Dealer(car.getDealership_id(), true));
-                    d.addToListOfCarsAtDealer(car);
-                }
-            }
-        }
+//        for(Vehicle car : cars) {
+//            for(Dealer d : listOfDealers) {
+//                if(car.getDealership_id() != d.getDealer_id()){
+//                    listOfDealers.add(new Dealer(car.getDealership_id(), true));
+//                    d.addToListOfCarsAtDealer(car);
+//                }
+//            }
+//        }
 
         for(Vehicle car : cars) {
             Dealer dealer = listOfDealers.stream().filter(d -> d.getDealer_id().equals(car.getDealership_id())).findFirst().orElse(null);
@@ -194,6 +194,22 @@ public class Converters {
                 System.out.println("Vehicle Type of " + vehicleTypeString + " is not allowed for vehicle ID: "
                         + c.getAsJsonObject().get("vehicle_id").getAsString());
                 System.out.println("Vehicle not added.");
+            }
+
+            if (listOfDealers.size() == 0 && cars.size() > 0) {
+                Dealer d = new Dealer(cars.get(0).getDealership_id(), true);
+                //d.setName(dealersNames.get(d.getDealer_id()));
+                listOfDealers.add(d);
+            }
+
+            for(Vehicle car : cars) {
+                Dealer dealer = listOfDealers.stream().filter(d -> d.getDealer_id().equals(car.getDealership_id())).findFirst().orElse(null);
+                if( dealer == null ) {
+                    dealer = new Dealer(car.getDealership_id(), true);
+                    //dealer.setName(dealersNames.get(dealer.getDealer_id()));
+                    listOfDealers.add(dealer);
+                }
+                dealer.addToListOfCarsAtDealer(car);
             }
 
         }
