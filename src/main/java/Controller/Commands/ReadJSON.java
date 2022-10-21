@@ -19,7 +19,7 @@ public class ReadJSON {
     public void readJSON() throws IOException, ParserConfigurationException, SAXException {
         JButton open = new JButton();
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new java.io.File("C:/Users"));
+        fileChooser.setCurrentDirectory(new File("C:/Users"));
         // Titles the text box
         fileChooser.setDialogTitle("JSON file to Converter");
         if (fileChooser.showOpenDialog(open) == JFileChooser.APPROVE_OPTION) {
@@ -48,6 +48,26 @@ public class ReadJSON {
         //add new dealers to company//
         //////////////////////////////
 
+        /////////////////////////////////////////////////////////////////////////////////////////
+        //go threw all cars in the listOfcealers and all cars in Company and if there are matches, delete
+        //this will eliminate some code in the mega for()
+
+        //check all incoming cars to see if they are in any of the company dealers
+        for(Dealer newDealer : listOfDealers){
+            for(int i = 0; i < newDealer.getListOfCarsAtDealer().size(); i++){
+                Vehicle newVehicle = newDealer.getListOfCarsAtDealer().get(i);
+                for(Dealer companyDealer : Company.getCompany()){
+                    for(Vehicle companyVehicle : companyDealer.getListOfCarsAtDealer()){
+                        if(newVehicle.getVehicle_id().equals(companyVehicle.getVehicle_id())){
+                            newDealer.getListOfCarsAtDealer().remove(newVehicle);
+                            i=-1;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
         //get dealerIDs for all dealers in Company
         List<String> companyDealerIDs = new ArrayList<>();
         for(Dealer d : Company.getCompany()){
@@ -73,28 +93,32 @@ public class ReadJSON {
         for(Dealer newDealer : listOfDealers){
             for(Dealer companyDealer : Company.getCompany()){
 
-                //check to see there are no duplicate cars when adding cars from new dealer to company dealers
-                //check if company dealer has a name, if not and the new dealer does, added the name of the new dealer
-                // to the company dealer
+                //check if company dealer has a name, if not and the new dealer does,
+                //added the name of the new dealer to the company dealer
                 if(newDealer.getDealer_id().equals(companyDealer.getDealer_id())){
                     if(companyDealer.getName().equals("") && !newDealer.getName().equals("")){
                         companyDealer.setName(newDealer.getName());
                     }
 
-                    //get all vehicle ids from companyDealer
-                    List<String> companyVehicleIDs = new ArrayList<>();
-                    for(Vehicle v : companyDealer.getListOfCarsAtDealer()){
-                        companyVehicleIDs.add(v.getVehicle_id());
+
+                    for(Vehicle v : newDealer.getListOfCarsAtDealer()){
+                        companyDealer.getListOfCarsAtDealer().add(v);
                     }
 
-                    //if the newVehicle is not in the companyDealer, add it
-                    for(Vehicle newV : newDealer.getListOfCarsAtDealer()){
-                        if(!companyVehicleIDs.contains(newV.getVehicle_id())){
-                           companyDealer.getListOfCarsAtDealer().add(newV);
-                        }
-
-
-                    }
+//                    //get all vehicle ids from companyDealer
+//                    List<String> companyVehicleIDs = new ArrayList<>();
+//                    for(Vehicle v : companyDealer.getListOfCarsAtDealer()){
+//                        companyVehicleIDs.add(v.getVehicle_id());
+//                    }
+//
+//                    //if the newVehicle is not in the companyDealer, add it
+//                    for(Vehicle newV : newDealer.getListOfCarsAtDealer()){
+//                        if(!companyVehicleIDs.contains(newV.getVehicle_id())){
+//                           companyDealer.getListOfCarsAtDealer().add(newV);
+//                        }
+//
+//
+//                    }
                 }
             }
     }
