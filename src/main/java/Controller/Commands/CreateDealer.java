@@ -1,4 +1,4 @@
-package Controller.CommandsPkg;
+package Controller.Commands;
 
 public class CreateDealer {
 }

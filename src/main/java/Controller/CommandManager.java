@@ -13,23 +13,23 @@ import javax.xml.parsers.ParserConfigurationException;
 public class CommandManager {
 
     public void readJSON() throws IOException, ParserConfigurationException, SAXException {
-        Controller.CommandsPkg.ReadJSON command = new Controller.CommandsPkg.ReadJSON();
+        Controller.Commands.ReadJSON command = new Controller.Commands.ReadJSON();
         command.readJSON();
     }
     public void dealerOff(String dealerID){
-        Controller.CommandsPkg.DealerOff command = new Controller.CommandsPkg.DealerOff();
+        Controller.Commands.DealerOff command = new Controller.Commands.DealerOff();
         command.dealerOff(dealerID);
     }
     public void dealerOn(String dealerID){
-        Controller.CommandsPkg.DealerOn command = new Controller.CommandsPkg.DealerOn();
+        Controller.Commands.DealerOn command = new Controller.Commands.DealerOn();
         command.dealerOn(dealerID);
     }
     public boolean[] addCarGUI(String carMake, String carModel, String carDID, String carID, String carType, String carPrice){
-        Controller.CommandsPkg.AddCar command = new Controller.CommandsPkg.AddCar();
+        Controller.Commands.AddCar command = new Controller.Commands.AddCar();
         return command.addCarGUI(carMake, carModel, carDID, carID, carType, carPrice);
     }
     public boolean[] transferCar(String fromDealer, String carID, String toDealer){
-        Controller.CommandsPkg.TransferCar command = new Controller.CommandsPkg.TransferCar();
+        Controller.Commands.TransferCar command = new Controller.Commands.TransferCar();
         return command.transferCar(fromDealer, carID, toDealer);
     }
 

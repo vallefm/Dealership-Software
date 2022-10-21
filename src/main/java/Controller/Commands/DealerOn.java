@@ -1,4 +1,4 @@
-package Controller.CommandsPkg;
+package Controller.Commands;
 
 import Models.Company;
 import Models.Dealer;

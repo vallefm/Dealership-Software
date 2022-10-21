@@ -11,6 +11,6 @@ module view.dealership_software {
     opens Controller to javafx.fxml;
     exports Controller.GUIControllers;
     opens Controller.GUIControllers to javafx.fxml;
-    exports Controller.CommandsPkg;
-    opens Controller.CommandsPkg to javafx.fxml;
+    exports Controller.Commands;
+    opens Controller.Commands to javafx.fxml;
 }
