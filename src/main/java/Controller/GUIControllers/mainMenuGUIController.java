@@ -1,6 +1,7 @@
 package Controller.GUIControllers;
 
 import Controller.Commands;
+import Models.Company;
 import Models.Dealer;
 import Models.Vehicle;
 import javafx.collections.FXCollections;
@@ -97,7 +98,7 @@ public class mainMenuGUIController implements Initializable {
     }
 
     public void loadList(ActionEvent event) throws IOException {
-        for (Dealer d : cmds.listOfDealers) {
+        for (Dealer d : Company.getCompany()) {
             for(Vehicle i: d.getListOfCarsAtDealer()){
                 //This boolean serves to make sure that we do not add duplicates to list
                 boolean b = carList1.contains("Dealer ID: " + i.getDealership_id() + " | Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(i.getAcquisition_date()) + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model());

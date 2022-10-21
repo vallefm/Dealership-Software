@@ -1,6 +1,7 @@
 package Controller.GUIControllers;
 
 import Controller.Commands;
+import Models.Company;
 import Models.Dealer;
 import Models.Vehicle;
 import javafx.event.ActionEvent;
@@ -37,7 +38,7 @@ public class loanCarGUIController implements Initializable {
 
         String carID = carIDTextField.getText();
         currentVehicle = null;
-        for(Dealer d : cmds.listOfDealers){
+        for(Dealer d : Company.getCompany()){
             for(Vehicle v : d.getListOfCarsAtDealer()){
                 if(v.getVehicle_id().equals(carID)){
                     currentVehicle = v;

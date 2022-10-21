@@ -1,6 +1,7 @@
 package Controller.GUIControllers;
 
 import Controller.Commands;
+import Models.Company;
 import Models.Dealer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -39,7 +40,7 @@ public class dealerGUIController implements Initializable {
     }
 
     public void refreshList(ActionEvent event) throws IOException {
-        for (Dealer d : cmds.listOfDealers) {
+        for (Dealer d : Company.getCompany()) {
             boolean b = dealerList1.contains("Dealer ID: " + d.getDealer_id());
             if (b == false){
                 //This boolean serves to make sure that we do not add duplicates to list
