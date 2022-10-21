@@ -32,7 +32,7 @@ public class ReadJSON {
         List<Vehicle> listOfCars = new ArrayList<>();
 
 
-        //list of cars contains all cars read from json file
+        //list of dealers contains all cars read from json file
         Converters c = new Converters();
         if(fileAbsolutePath.contains(".xml")){
             File file = new File(fileAbsolutePath);
@@ -49,8 +49,8 @@ public class ReadJSON {
         //////////////////////////////
 
         /////////////////////////////////////////////////////////////////////////////////////////
-        //go threw all cars in the listOfcealers and all cars in Company and if there are matches, delete
-        //this will eliminate some code in the mega for()
+        //go threw all cars in the listOfDealers and all cars in Company and if there are matches,
+        // delete the car that is in the listOfDealers
 
         //check all incoming cars to see if they are in any of the company dealers
         for(Dealer newDealer : listOfDealers){
@@ -74,7 +74,7 @@ public class ReadJSON {
             companyDealerIDs.add(d.getDealer_id());
         }
 
-        //if a new dealer does not exist in company, add the new dealer to company
+        //if a Dealer id from listOfDealers does not exist in companyDealerIDs, add the new dealer to company
         List<Dealer> deleteFromListOfDealers = new ArrayList<>();
         for(Dealer d : listOfDealers){
             if(!companyDealerIDs.contains(d.getDealer_id())){
@@ -89,7 +89,7 @@ public class ReadJSON {
             listOfDealers.remove(d);
         }
 
-        //merge new dealers with company
+        //merge remaining new dealers with company dealers
         for(Dealer newDealer : listOfDealers){
             for(Dealer companyDealer : Company.getCompany()){
 
@@ -104,21 +104,6 @@ public class ReadJSON {
                     for(Vehicle v : newDealer.getListOfCarsAtDealer()){
                         companyDealer.getListOfCarsAtDealer().add(v);
                     }
-
-//                    //get all vehicle ids from companyDealer
-//                    List<String> companyVehicleIDs = new ArrayList<>();
-//                    for(Vehicle v : companyDealer.getListOfCarsAtDealer()){
-//                        companyVehicleIDs.add(v.getVehicle_id());
-//                    }
-//
-//                    //if the newVehicle is not in the companyDealer, add it
-//                    for(Vehicle newV : newDealer.getListOfCarsAtDealer()){
-//                        if(!companyVehicleIDs.contains(newV.getVehicle_id())){
-//                           companyDealer.getListOfCarsAtDealer().add(newV);
-//                        }
-//
-//
-//                    }
                 }
             }
     }

@@ -71,8 +71,15 @@ public class transferGUIController implements Initializable {
 
         //display invalid to dealer id
         if (outcome[3]) {
+            transfer_To_InvalidDealerID.setText("Invalid dealer id");
             transfer_To_InvalidDealerID.setVisible(true);
         }
+
+//        //display if toDealer is closed
+//        if (outcome[4]) {
+//            transfer_To_InvalidDealerID.setText("Dealer Closed");
+//            transfer_To_InvalidDealerID.setVisible(true);
+//        }
     }
 
 
