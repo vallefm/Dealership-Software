@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -39,6 +40,15 @@ public class mainMenuGUIController implements Initializable {
     @FXML
     private TextField addCarPrice;
 
+    //add car error / success labels
+    @FXML
+    private Label invalid_DealerID;
+    @FXML
+    private Label invalid_CarID;
+    @FXML
+    private Label invalid_Type;
+    @FXML
+    private Label success;
 
 
    //list
@@ -60,7 +70,30 @@ public class mainMenuGUIController implements Initializable {
         String carID = addCarID.getText();
         String carType = addCarType.getText();
         String carPrice = addCarPrice.getText();
-        cmds.addCarGUI(carMake, carModel, carDID, carID, carType, carPrice);
+        boolean[] outcome = cmds.addCarGUI(carMake, carModel, carDID, carID, carType, carPrice);
+
+        //set error / success label to not visible
+        invalid_Type.setVisible(false);
+        invalid_CarID.setVisible(false);
+        invalid_DealerID.setVisible(false);
+        success.setVisible(false);
+
+        //dealerID does not exist
+        if(outcome[0]){
+            invalid_DealerID.setText("Invalid");
+            invalid_DealerID.setVisible(true);
+        }
+        //dealer is closed
+        if(outcome[1]){
+            invalid_DealerID.setText("Dealer Closed");
+            invalid_DealerID.setVisible((true));
+        }
+        //non unique carID
+        if(outcome[2]){invalid_CarID.setVisible(true);}
+        //invalid type
+        if(outcome[3]){invalid_Type.setVisible(true);}
+        //no errors -> success
+        if(outcome[4]){success.setVisible(true);}
     }
 
     public void loadList(ActionEvent event) throws IOException {
