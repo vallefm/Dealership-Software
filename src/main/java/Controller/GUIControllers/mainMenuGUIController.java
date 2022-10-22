@@ -149,6 +149,22 @@ public class mainMenuGUIController implements Initializable {
         System.exit(0);
     }
 
+    //Clears the textbox and any error messages
+    public void resetTextBoxAndErrors() {
+
+        //Clears the error messages
+        invalid_CarID.setVisible(false);
+        invalid_DealerID.setVisible(false);
+        success.setVisible(false);
+
+        //Clears the textbox fields
+        addCarMake.clear();
+        addCarModel.clear();
+        addCarDID.clear();
+        addCarID.clear();
+        addCarPrice.clear();
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
