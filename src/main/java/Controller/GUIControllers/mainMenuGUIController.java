@@ -99,9 +99,9 @@ public class mainMenuGUIController implements Initializable {
         //non unique carID
         if(outcome[2]){invalid_CarID.setVisible(true);}
         //invalid type
-        if(outcome[3]){invalid_Type.setVisible(true);}
+        //if(outcome[3]){invalid_Type.setVisible(true);}
         //no errors -> success
-        if(outcome[4]){success.setVisible(true);}
+        if(outcome[3]){success.setVisible(true);}
     }
 
     public void loadList(ActionEvent event) throws IOException {

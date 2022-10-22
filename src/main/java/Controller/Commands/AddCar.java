@@ -95,7 +95,7 @@ public class AddCar {
         dealer.addToListOfCarsAtDealer(car);
 
         //Set success outcome
-        outcome[4] = true;
+        outcome[3] = true;
 
         return outcome;
 
