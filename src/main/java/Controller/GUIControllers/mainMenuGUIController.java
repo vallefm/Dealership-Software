@@ -51,8 +51,6 @@ public class mainMenuGUIController implements Initializable {
     @FXML
     private Label invalid_CarID;
     @FXML
-    private Label invalid_Type;
-    @FXML
     private Label success;
 
     @FXML

@@ -44,7 +44,16 @@ public class transferGUIController implements Initializable {
         String from = transfer_From_DealerID.getText();
         String carID = transfer_CarID.getText();
         String to = transfer_To_DealerID.getText();
-        boolean[] outcome = cmds.transferCar(from, carID, to);
+
+        boolean [] outcome = cmds.transferCar(from, carID, to);
+
+        //error booleans
+        boolean success = outcome[0];
+        boolean invalid_From_DealerID = outcome[1];
+        boolean invalid_CarID = outcome[2];
+        boolean invalid_TO_DealerID = outcome[3];
+        boolean invalid_To_DealerClosed = outcome[4];
+
 
         //error / success message
 
@@ -55,31 +64,31 @@ public class transferGUIController implements Initializable {
         transfer_To_InvalidDealerID.setVisible(false);
 
         //display success
-        if (outcome[0]) {
+        if (success) {
             transfer_Success.setVisible(true);
         }
 
         //display invalid from dealer id
-        if (outcome[1]) {
+        if (invalid_From_DealerID) {
             transfer_From_InvalidDealerID.setVisible(true);
         }
 
-        //display
-        if (outcome[2]) {
+        //display invalid carID
+        if (invalid_CarID) {
             transfer_InvalidCarID.setVisible(true);
         }
 
         //display invalid to dealer id
-        if (outcome[3]) {
+        if (invalid_TO_DealerID) {
             transfer_To_InvalidDealerID.setText("Invalid dealer id");
             transfer_To_InvalidDealerID.setVisible(true);
         }
 
-//        //display if toDealer is closed
-//        if (outcome[4]) {
-//            transfer_To_InvalidDealerID.setText("Dealer Closed");
-//            transfer_To_InvalidDealerID.setVisible(true);
-//        }
+        //display if toDealer is closed
+        if (invalid_To_DealerClosed) {
+            transfer_To_InvalidDealerID.setText("Dealer Closed");
+            transfer_To_InvalidDealerID.setVisible(true);
+        }
     }
 
 

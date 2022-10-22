@@ -16,10 +16,9 @@ public class TransferCar {
         //outcome will be return to determine what error or success message are displayed
         boolean success = false;
         boolean invalid_FromDealerID = false;
-        boolean invalid_ToDealerID = false;
         boolean invalid_carID = false;
-
-        boolean[] outcome = {success, invalid_FromDealerID, invalid_ToDealerID, invalid_carID};
+        boolean invalid_ToDealerID = false;
+        boolean invalid_ToDealerClosed = false;
 
         //get list of dealer ids
         List<String> dealerIds = new ArrayList<>();
@@ -27,55 +26,80 @@ public class TransferCar {
             dealerIds.add(dealer.getDealer_id());
         }
 
-        //check if fromDealer exists in dealerIds
-        if (!dealerIds.contains(fromDealerID)) {
-            outcome[1] = true;
-        }
-        //check if toDealer exists in dealerIds
-        if (!dealerIds.contains(toDealerID)) {
-            outcome[3] = true;
-        }
-
-        //if fromDealer or toDealer do not exist return
-        if (outcome[1] || outcome[3]) {
-            return outcome;
-        }
-
-        //get dealer object from the fromDealerID
-        //get dealer object from the toDealerID
+        //check if fromDealerID exists in dealerIds
+        //if it does, get Dealer fromDealer
+        //check if carID exists in fromDealer
+        Vehicle carToBeTransfered = null;
         Dealer fromDealer = null;
+        if (!dealerIds.contains(fromDealerID)) {
+            invalid_FromDealerID = true;
+        }
+        else{
+            //fromDealerID exists in dealerIds
+            //get Dealer fromDealer
+            for(Dealer d : Company.getCompany()){
+                if(d.getDealer_id().equals(fromDealerID)){
+                    fromDealer = d;
+                }
+            }
+            //check if carID exists in fromDealer
+            for(Vehicle v : fromDealer.getListOfCarsAtDealer()){
+                if(v.getVehicle_id().equals(carID)){
+                    carToBeTransfered = v;
+                }
+            }
+
+            //if car deos not exist in fromDealer error
+            if(carToBeTransfered == null){
+                invalid_carID = true;
+            }
+        }
+
+
+
+        //check if toDealerID exists in dealerIds
+        //if it does, get Dealer toDealer
+        //check if toDealer is closed
         Dealer toDealer = null;
-        for (Dealer dealer : listOfDealers) {
-            if (dealer.getDealer_id().equals(fromDealerID)) {
-                fromDealer = dealer;
+        if (!dealerIds.contains(toDealerID)) {
+            invalid_ToDealerID = true;
+        }else{
+            //toDealerID exists in DealerIds
+            //get Dealer toDealer
+            //check of toDealer is open
+            for(Dealer d : Company.getCompany()){
+                if(d.getDealer_id().equals(toDealerID)){
+                    toDealer = d;
+                }
             }
-            if (dealer.getDealer_id().equals(toDealerID)) {
-                toDealer = dealer;
+
+            if(!toDealer.getIsActivatedStatus()){
+                invalid_ToDealerClosed = true;
             }
         }
 
-        //check if car exists at fromDealer
-        boolean carExists = false;
-        Vehicle tempV = null;
-        for (Vehicle v : fromDealer.getListOfCarsAtDealer()) {
-            if (v.getVehicle_id().equals(carID)) {
-                carExists = true;
-                tempV = v;
-            }
+        //if any errors are found, return
+        if (invalid_FromDealerID || invalid_carID || invalid_ToDealerID || invalid_ToDealerClosed) {
+            return new boolean[]{
+                    success, //always false here
+                    invalid_FromDealerID,
+                    invalid_carID,
+                    invalid_ToDealerID,
+                    invalid_ToDealerClosed};
         }
 
-        //if the carID is not found in the fromDealer, return
-        if (!carExists) {
-            outcome[2] = true;
-            return outcome;
-        }
 
         //success -> transfer car
-        fromDealer.getListOfCarsAtDealer().remove(tempV);
-        toDealer.getListOfCarsAtDealer().add(tempV);
-        tempV.setDealership_id(toDealerID);
-        outcome[0] = true;
+        fromDealer.getListOfCarsAtDealer().remove(carToBeTransfered);
+        toDealer.getListOfCarsAtDealer().add(carToBeTransfered);
+        carToBeTransfered.setDealership_id(toDealerID);
+        success = true;
 
-        return outcome;
+        return new boolean[]{
+                success, //true
+                invalid_FromDealerID, //always false
+                invalid_carID, //always false
+                invalid_ToDealerID, //always false
+                invalid_ToDealerClosed}; //always false
     }
 }
