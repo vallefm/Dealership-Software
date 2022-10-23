@@ -1,7 +1,6 @@
 package Controller.GUIControllers;
 
 import Controller.CommandManager;
-import Controller.Commands.AddCar;
 import Models.Company;
 import Models.Dealer;
 import Models.Vehicle;
@@ -26,7 +25,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.ResourceBundle;
 
 public class mainMenuGUIController implements Initializable {
@@ -79,7 +77,6 @@ public class mainMenuGUIController implements Initializable {
         boolean[] outcome = cmds.addCarGUI(carMake, carModel, carDID, carID, carType, carPrice);
 
         //set error / success label to not visible
-        //invalid_Type.setVisible(false);
         invalid_CarID.setVisible(false);
         invalid_DealerID.setVisible(false);
         success.setVisible(false);
@@ -96,10 +93,11 @@ public class mainMenuGUIController implements Initializable {
         }
         //non unique carID
         if(outcome[2]){invalid_CarID.setVisible(true);}
-        //invalid type
-        //if(outcome[3]){invalid_Type.setVisible(true);}
+
         //no errors -> success
-        if(outcome[3]){success.setVisible(true);}
+        if(outcome[3]){
+            success.setVisible(true);
+        }
     }
 
     public void loadList(ActionEvent event) throws IOException {
