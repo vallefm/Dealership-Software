@@ -222,7 +222,7 @@ public class Converters {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         // Json file Dealer
-        String path = "C:\\Users\\Public\\" + dealer.getDealer_id() + ".json";
+        String path = System.getProperty("user.dir")+"\\" + dealer.getDealer_id() + ".json";
         File file = new File(path);
         FileWriter fw;
 

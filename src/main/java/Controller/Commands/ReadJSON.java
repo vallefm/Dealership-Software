@@ -19,7 +19,7 @@ public class ReadJSON {
     public void readJSON() throws IOException, ParserConfigurationException, SAXException {
         JButton open = new JButton();
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File("C:/Users"));
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
         // Titles the text box
         fileChooser.setDialogTitle("JSON file to Converter");
         if (fileChooser.showOpenDialog(open) == JFileChooser.APPROVE_OPTION) {
