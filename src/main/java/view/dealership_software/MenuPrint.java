@@ -18,3 +18,4 @@ public class MenuPrint {
         return message;
     }
 }
+

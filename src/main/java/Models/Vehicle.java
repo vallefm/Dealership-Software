@@ -11,6 +11,8 @@ public class Vehicle {
     private int price;
     private long acquisition_date;
 
+    private boolean isLoaned;
+
     public Vehicle(String dealership_id, String vehicle_type, String vehicle_manufacturer, String vehicle_model, String vehicle_id, int price, long acquisition_date) {
         this.dealership_id = dealership_id;
         this.vehicle_type = vehicle_type;
@@ -19,6 +21,7 @@ public class Vehicle {
         this.vehicle_id = vehicle_id;
         this.price = price;
         this.acquisition_date = acquisition_date;
+        this.isLoaned = false;
     }
 
     //this will set the dealership ID to whatever string is input for dealership_ID
@@ -56,6 +59,12 @@ public class Vehicle {
         this.acquisition_date = acquisition_date;
     }
 
+    public void setIsLoaned(boolean bool){this.isLoaned = bool;}
+
+
+    public boolean getIsLoaned(){
+        return this.isLoaned;
+    }
     public String getDealership_id() {
         return dealership_id;
     }

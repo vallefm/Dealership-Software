@@ -8,6 +8,7 @@ public class Dealer {
 
     private boolean isActivated = true;
     private String dealer_id;
+    private String dealer_name = "";
     List<Vehicle> listOfCarsAtDealer = new ArrayList<Vehicle>();
 
     public void getAllCarsID() {
@@ -31,6 +32,8 @@ public class Dealer {
     public void setDealer_id(String id) {
         dealer_id = id;
     }
+
+    public void setName(String name) { dealer_name = name; }
 
     public List<Vehicle> getListOfCarsAtDealer() {
         return listOfCarsAtDealer;
@@ -57,9 +60,7 @@ public class Dealer {
         return arr;
     }
 
-    public String getID(){
-        return dealer_id;
-    }
+    public String getName(){ return dealer_name; }
 
     public String getActivatedStatus(){
         if(isActivated){
