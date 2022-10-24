@@ -6,10 +6,10 @@ import java.util.List;
 
 public class Dealer {
 
-    private boolean isActivated = true;
-    private String dealer_id;
-    private String dealer_name = "";
-    List<Vehicle> listOfCarsAtDealer = new ArrayList<Vehicle>();
+     public boolean isActivated = true;
+     private String dealer_id;
+     private String dealer_name = "";
+     private List<Vehicle> listOfCarsAtDealer = new ArrayList<Vehicle>();
 
     public void getAllCarsID() {
         for (Vehicle i : listOfCarsAtDealer) {

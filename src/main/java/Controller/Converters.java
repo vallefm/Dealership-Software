@@ -227,21 +227,19 @@ public class Converters {
         File file = new File(path);
         FileWriter fw;
 
-        //create file and write the dealer inforamtion to it
+        //create file and write the dealer information to it
         try {
             file.createNewFile();
 
             fw = new FileWriter(file);
 
-            fw.write(gson.toJson(dealer));
+            String jsonString = "";
+            //fw.write(gson.toJson(dealer));
 
             fw.close();
         } catch (IOException e) {
-            System.out.println("Error: Failed to create or write to Json File");
             throw new RuntimeException(e);
         }
-
-        System.out.println("Your file was sent to C:\\Users\\Public");
 
     }
 }

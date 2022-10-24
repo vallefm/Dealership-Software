@@ -49,7 +49,10 @@ public class CommandManager {
         Controller.Commands.CreateDealer command = new Controller.Commands.CreateDealer();
         return command.createDealer(dID, dName);
     }
-    public void exportFromDealerToJSON(){}
+    public boolean exportFromDealerToJSON(String dealerID){
+        Controller.Commands.ExportDealerToJSON command = new Controller.Commands.ExportDealerToJSON();
+        return command.exportDealerToJSON(dealerID);
+    }
     public void saveAndExit(){}
 
 

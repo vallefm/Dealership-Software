@@ -110,7 +110,7 @@ public class mainMenuGUIController implements Initializable {
     }
 
 
-    public void loadCarList(){
+    private void loadCarList(){
 
         carList1 = FXCollections.observableArrayList();
         for (Dealer d : Company.getCompany()) {
