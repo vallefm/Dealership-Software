@@ -43,7 +43,7 @@ public class CommandManager {
         command.setLoanStatus(carID);
     }
 
-    
+
     public boolean createDealer(String dID, String dName){
         Controller.Commands.CreateDealer command = new Controller.Commands.CreateDealer();
         return command.createDealer(dID, dName);
@@ -52,7 +52,10 @@ public class CommandManager {
         Controller.Commands.ExportDealerToJSON command = new Controller.Commands.ExportDealerToJSON();
         return command.exportDealerToJSON(dealerID);
     }
-    public void saveAndExit(){}
+    public void saveAndExit(){
+        Controller.Commands.SaveAndExit command = new Controller.Commands.SaveAndExit();
+        command.saveAndExit();
+    }
 
 
 
