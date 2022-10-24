@@ -74,7 +74,9 @@ public class dealerGUIController implements Initializable {
 
         if(invalid_DealerID){
             label_Invalid_DealerID.setVisible(true);
+            loadDealerList();
         }else{
+            loadDealerInventory();
             label_Success.setVisible(true);
         }
     }
@@ -119,6 +121,7 @@ public class dealerGUIController implements Initializable {
         //show error label if dealer not found
         if(currDealer == null){
             label_Invalid_DealerID.setVisible(true);
+            loadDealerList();
         }else {
             label_Invalid_DealerID.setVisible(false);
 

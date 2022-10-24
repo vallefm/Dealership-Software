@@ -43,8 +43,7 @@ public class CommandManager {
         command.setLoanStatus(carID);
     }
 
-
-    //not yet implemented in gui
+    
     public boolean createDealer(String dID, String dName){
         Controller.Commands.CreateDealer command = new Controller.Commands.CreateDealer();
         return command.createDealer(dID, dName);
