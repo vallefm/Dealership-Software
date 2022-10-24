@@ -33,28 +33,26 @@ public class TransferCar {
         Dealer fromDealer = null;
         if (!dealerIds.contains(fromDealerID)) {
             invalid_FromDealerID = true;
-        }
-        else{
+        } else {
             //fromDealerID exists in dealerIds
             //get Dealer fromDealer
-            for(Dealer d : Company.getCompany()){
-                if(d.getDealer_id().equals(fromDealerID)){
+            for (Dealer d : Company.getCompany()) {
+                if (d.getDealer_id().equals(fromDealerID)) {
                     fromDealer = d;
                 }
             }
             //check if carID exists in fromDealer
-            for(Vehicle v : fromDealer.getListOfCarsAtDealer()){
-                if(v.getVehicle_id().equals(carID)){
+            for (Vehicle v : fromDealer.getListOfCarsAtDealer()) {
+                if (v.getVehicle_id().equals(carID)) {
                     carToBeTransfered = v;
                 }
             }
 
             //if car deos not exist in fromDealer error
-            if(carToBeTransfered == null){
+            if (carToBeTransfered == null) {
                 invalid_carID = true;
             }
         }
-
 
 
         //check if toDealerID exists in dealerIds
@@ -63,17 +61,17 @@ public class TransferCar {
         Dealer toDealer = null;
         if (!dealerIds.contains(toDealerID)) {
             invalid_ToDealerID = true;
-        }else{
+        } else {
             //toDealerID exists in DealerIds
             //get Dealer toDealer
             //check of toDealer is open
-            for(Dealer d : Company.getCompany()){
-                if(d.getDealer_id().equals(toDealerID)){
+            for (Dealer d : Company.getCompany()) {
+                if (d.getDealer_id().equals(toDealerID)) {
                     toDealer = d;
                 }
             }
 
-            if(!toDealer.getIsActivatedStatus()){
+            if (!toDealer.getIsActivatedStatus()) {
                 invalid_ToDealerClosed = true;
             }
         }
@@ -87,19 +85,22 @@ public class TransferCar {
                     invalid_ToDealerID,
                     invalid_ToDealerClosed};
         }
+        else {
 
 
-        //success -> transfer car
-        fromDealer.getListOfCarsAtDealer().remove(carToBeTransfered);
-        toDealer.getListOfCarsAtDealer().add(carToBeTransfered);
-        carToBeTransfered.setDealership_id(toDealerID);
-        success = true;
+            //success -> transfer car
+            fromDealer.getListOfCarsAtDealer().remove(carToBeTransfered);
+            toDealer.getListOfCarsAtDealer().add(carToBeTransfered);
+            carToBeTransfered.setDealership_id(toDealerID);
+            success = true;
 
-        return new boolean[]{
-                success, //true
-                invalid_FromDealerID, //always false
-                invalid_carID, //always false
-                invalid_ToDealerID, //always false
-                invalid_ToDealerClosed}; //always false
+            return new boolean[]{
+                    success, //true
+                    invalid_FromDealerID, //always false
+                    invalid_carID, //always false
+                    invalid_ToDealerID, //always false
+                    invalid_ToDealerClosed  //always false
+            };
+        }
     }
 }

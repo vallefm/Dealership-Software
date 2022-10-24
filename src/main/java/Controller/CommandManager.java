@@ -1,13 +1,13 @@
 package Controller;
+
 import java.io.IOException;
 
+import Controller.Commands.LoanSearch;
 import org.xml.sax.SAXException;
-
 import javax.xml.parsers.ParserConfigurationException;
 
 
-// This class has a list of methods called commands, that are called from UI class. Each method will perform a specific task.
-
+//The GUIControllers call this class. This class calls the command class that the GUIController needs to use
 
 
 public class CommandManager {
@@ -31,6 +31,16 @@ public class CommandManager {
     public boolean[] transferCar(String fromDealer, String carID, String toDealer){
         Controller.Commands.TransferCar command = new Controller.Commands.TransferCar();
         return command.transferCar(fromDealer, carID, toDealer);
+    }
+
+    public boolean[] loanSearch(String carID){
+        Controller.Commands.LoanSearch command = new Controller.Commands.LoanSearch();
+        return command.loanSearch(carID);
+    }
+
+    public void setLoanStatus(String carID){
+        Controller.Commands.SetLoanStatus command = new Controller.Commands.SetLoanStatus();
+        command.setLoanStatus(carID);
     }
 
 
