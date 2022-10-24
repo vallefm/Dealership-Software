@@ -233,8 +233,7 @@ public class Converters {
 
             fw = new FileWriter(file);
 
-            String jsonString = "";
-            //fw.write(gson.toJson(dealer));
+            fw.write(gson.toJson(dealer));
 
             fw.close();
         } catch (IOException e) {

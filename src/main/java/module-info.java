@@ -8,9 +8,12 @@ module view.dealership_software {
     opens view.dealership_software to javafx.fxml;
     exports view.dealership_software;
     exports Controller;
-    opens Controller to javafx.fxml;
+    //opens Controller to javafx.fxml;
     exports Controller.GUIControllers;
     opens Controller.GUIControllers to javafx.fxml;
-    exports Controller.Commands;
-    opens Controller.Commands to javafx.fxml;
+
+    opens Controller to com.google.gson;
+    opens Models to com.google.gson;
+
+
 }
