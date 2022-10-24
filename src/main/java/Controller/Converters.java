@@ -196,23 +196,24 @@ public class Converters {
                 System.out.println("Vehicle not added.");
             }
 
-            if (listOfDealers.size() == 0 && cars.size() > 0) {
+        }
+
+        if (listOfDealers.size() == 0 && cars.size() > 0) {
                 Dealer d = new Dealer(cars.get(0).getDealership_id(), true);
                 //d.setName(dealersNames.get(d.getDealer_id()));
                 listOfDealers.add(d);
-            }
-
-            for(Vehicle car : cars) {
-                Dealer dealer = listOfDealers.stream().filter(d -> d.getDealer_id().equals(car.getDealership_id())).findFirst().orElse(null);
-                if( dealer == null ) {
-                    dealer = new Dealer(car.getDealership_id(), true);
-                    //dealer.setName(dealersNames.get(dealer.getDealer_id()));
-                    listOfDealers.add(dealer);
-                }
-                dealer.addToListOfCarsAtDealer(car);
-            }
-
         }
+        //This method duplicates cars
+        for(Vehicle car : cars) {
+            Dealer dealer = listOfDealers.stream().filter(d -> d.getDealer_id().equals(car.getDealership_id())).findFirst().orElse(null);
+            if( dealer == null ) {
+                dealer = new Dealer(car.getDealership_id(), true);
+                //dealer.setName(dealersNames.get(dealer.getDealer_id()));
+                listOfDealers.add(dealer);
+            }
+            dealer.addToListOfCarsAtDealer(car);
+        }
+
         return listOfDealers;
     }
 

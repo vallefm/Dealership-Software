@@ -43,6 +43,7 @@ public class loanCarGUIController implements Initializable {
 
         //error message
         invalidCarID.setVisible(false);
+        //loan button (only will be shown if carId is valid)
         loanRadioButton.setVisible(false);
 
         //if car does not exist error

@@ -29,7 +29,6 @@ public class ReadJSON {
         String fileAbsolutePath = fileChooser.getSelectedFile().getAbsolutePath();
 
         List<Dealer> listOfDealers;
-        List<Vehicle> listOfCars = new ArrayList<>();
 
 
         //list of dealers contains all cars read from json file
@@ -42,6 +41,7 @@ public class ReadJSON {
             FileReader file = new FileReader(fileAbsolutePath);
             listOfDealers = c.fromJsonToInvArr(file);
         }
+
 
 
         //////////////////////////////
@@ -67,6 +67,8 @@ public class ReadJSON {
                 }
             }
         }
+
+
 
         //get dealerIDs for all dealers in Company
         List<String> companyDealerIDs = new ArrayList<>();

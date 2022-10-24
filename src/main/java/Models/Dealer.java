@@ -77,6 +77,11 @@ public class Dealer {
         isActivated = status;
     }
 
+    public Dealer(String id, String dealerName){
+        this.dealer_id = id;
+        this.dealer_name = dealerName;
+    }
+
     public Dealer() {
 
     }
