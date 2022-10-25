@@ -101,6 +101,10 @@ public class Converters {
 //
 //                    }
                     cars.add(car);
+                    if(unit.equalsIgnoreCase("pounds")){
+                        car.setCurrencyType("£");
+                    }
+
                 } else {
                     //if a non allowed car is read, do not add it to cars
                     System.out.println("Vehicle Type of " + type + " is not allowed for vehicle ID: "

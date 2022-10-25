@@ -11,6 +11,8 @@ public class Vehicle implements java.io.Serializable{
     private String vehicle_model;
     private String vehicle_id;
     private int price;
+
+    private String currencyType = "$";
     private long acquisition_date;
 
     private boolean isLoaned;
@@ -24,6 +26,10 @@ public class Vehicle implements java.io.Serializable{
         this.price = price;
         this.acquisition_date = acquisition_date;
         this.isLoaned = false;
+    }
+
+    public void setCurrencyType(String unit){
+        this.currencyType = unit;
     }
 
     //this will set the dealership ID to whatever string is input for dealership_ID
@@ -64,6 +70,9 @@ public class Vehicle implements java.io.Serializable{
     public void setIsLoaned(boolean bool){this.isLoaned = bool;}
 
 
+    public String getCurrencyType(){
+        return this.currencyType;
+    }
     public boolean getIsLoaned(){
         return this.isLoaned;
     }
