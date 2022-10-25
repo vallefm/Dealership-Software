@@ -1,8 +1,12 @@
 package Controller;
+
+import Models.Company;
+import Models.Dealer;
+
+import java.util.ArrayList;
 import java.io.IOException;
 
 import org.xml.sax.SAXException;
-
 import javax.xml.parsers.ParserConfigurationException;
 
 
@@ -37,7 +41,13 @@ public class CommandManager {
     //not yet implemented in gui
     public void createDealer(){}
     public void exportFromDealerToJSON(){}
-    public void saveAndExit(){}
+
+    public void saveAndExit(){
+        
+        Controller.Commands.SaveAndExit command = new Controller.Commands.SaveAndExit();
+        command.saveAndExit();
+    }
+    
 
 
 

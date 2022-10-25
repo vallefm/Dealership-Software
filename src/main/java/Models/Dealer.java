@@ -4,7 +4,7 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dealer {
+public class Dealer{
 
     private boolean isActivated = true;
     private String dealer_id;

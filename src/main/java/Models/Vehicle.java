@@ -1,6 +1,8 @@
 package Models;
 
-public class Vehicle {
+import java.time.Instant;
+
+public class Vehicle implements java.io.Serializable{
 
     // Model
     private String dealership_id;
@@ -91,6 +93,10 @@ public class Vehicle {
 
     public long getAcquisition_date() {
         return acquisition_date;
+    }
+    public String toString(){
+        String someString =  "Car ID: " + this.getVehicle_id() + " | Car Price: " + this.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(this.getAcquisition_date()) + " | vehicle type: " + this.getVehicle_type() + " | vehicle manufacturer: " + this.getVehicle_manufacturer() + " | vehicle model: " + this.getVehicle_model();
+        return someString;
     }
 
 }

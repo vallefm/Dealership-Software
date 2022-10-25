@@ -36,7 +36,7 @@
          </font>
       </Label>
       <Button layoutX="39.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchToDealerGUI" text="Switch to dealer tab" />
-      <Button layoutX="729.0" layoutY="446.0" mnemonicParsing="false" onAction="#exitProgram" text="Save &amp; Exit" />
+      <Button layoutX="729.0" layoutY="446.0" mnemonicParsing="false" onAction="#saveAndExit" text="Save &amp; Exit" />
       <Button layoutX="744.0" layoutY="25.0" mnemonicParsing="false" onAction="#switchToTransferGUI" text="Switch to transfer tab" />
       <Button layoutX="602.0" layoutY="25.0" mnemonicParsing="false" onAction="#switchToLoanGUI" text="Switch to loan tab" />
       <Label fx:id="invalid_DealerID" layoutX="793.0" layoutY="109.0" text="Invalid" textFill="RED" visible="false" />

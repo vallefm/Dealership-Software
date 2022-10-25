@@ -1,12 +1,14 @@
 package Controller.GUIControllers;
 
 import Controller.CommandManager;
+import Controller.Converters;
 import Models.Company;
 import Models.Dealer;
 import Models.Vehicle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -21,6 +23,8 @@ import org.xml.sax.SAXException;
 import view.dealership_software.GUI;
 
 import javax.xml.parsers.ParserConfigurationException;
+
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
@@ -65,6 +69,8 @@ public class mainMenuGUIController implements Initializable {
 
     public void readJson(ActionEvent event) throws IOException, ParserConfigurationException, SAXException {
         cmds.readJSON();
+        System.out.println("Hi");
+        this.loadList(event);   
     }
 
     public void addCar(ActionEvent event) {
@@ -100,7 +106,7 @@ public class mainMenuGUIController implements Initializable {
         }
     }
 
-    public void loadList(ActionEvent event) throws IOException {
+    public void loadList(ActionEvent...event) throws IOException {
         for (Dealer d : Company.getCompany()) {
             for(Vehicle i: d.getListOfCarsAtDealer()){
                 //This boolean serves to make sure that we do not add duplicates to list
@@ -113,8 +119,22 @@ public class mainMenuGUIController implements Initializable {
 
 
         carList.setItems(carList1);
-
     }
+
+    public void loadList(){
+        for (Dealer d : Company.getCompany()) {
+            for(Vehicle i: d.getListOfCarsAtDealer()){
+                //This boolean serves to make sure that we do not add duplicates to list
+                boolean b = carList1.contains("Dealer ID: " + i.getDealership_id() + " | Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(i.getAcquisition_date()) + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model() + " | loan status: " + i.getIsLoaned());
+                if (b == false) {
+                    carList1.add("Dealer ID: " + i.getDealership_id() + " | Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(i.getAcquisition_date()) + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model() + " | loan status: " + i.getIsLoaned());
+                }
+            }
+        }
+
+        carList.setItems(carList1);
+    }
+
     public void switchToDealerGUI(ActionEvent event) throws IOException {
         //Parent root = FXMLLoader.load(getClass().getResource("DealerGUI.fxml"));
         FXMLLoader root = new FXMLLoader(GUI.class.getResource("DealerGUI.fxml"));
@@ -142,6 +162,11 @@ public class mainMenuGUIController implements Initializable {
     }
 
     public void exitProgram() {
+        System.exit(0);
+    }
+
+    public void saveAndExit(ActionEvent event) {
+        cmds.saveAndExit();
         System.exit(0);
     }
 
@@ -174,5 +199,13 @@ public class mainMenuGUIController implements Initializable {
 
         //Populate the carTypeChoiceBox with allowed vehicle type
         addCarTypeChoiceBox.getItems().addAll(allowedCarType);
+
+
+        String serializedDataFilePath = System.getProperty("user.dir") + "\\company-serialized-data.ser";
+        File f = new File(serializedDataFilePath);
+        if(f.exists() && !f.isDirectory()){
+            Controller.Converters.deserializeData(serializedDataFilePath);
+            this.loadList();   
+        }
     }
 }

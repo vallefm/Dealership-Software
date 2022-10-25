@@ -39,6 +39,7 @@ public class dealerGUIController implements Initializable {
         String dealerID = DealerIDField.getText();
         cmds.dealerOff(dealerID);
     }
+    
 
     public void refreshList(ActionEvent event) throws IOException {
         for (Dealer d : Company.getCompany()) {

@@ -81,7 +81,6 @@ public class ReadJSON {
                 Company.getCompany().add(d);
                 deleteFromListOfDealers.add(d);
             }
-
         }
 
         //delete the dealers that have been added to Company
