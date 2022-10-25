@@ -21,6 +21,7 @@ class SetLoanStatusTest {
 
     Vehicle newCar = new Vehicle(dealershipId, vehicleType, vehicleManufacturer, vehicleModel, vehicleId, vehiclePrice, acquisition_date);
 
+
     @Test
     void setLoanStatus() {
         Company.getCompany().add(new Dealer(dealershipId, true));
