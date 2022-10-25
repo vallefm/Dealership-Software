@@ -39,9 +39,7 @@ public class AddCar {
         boolean invalid_dealerID = false;
         boolean invalid_DealerClosed = false;
         boolean invalid_carID = false;
-        //boolean invalid_Type = false;
         boolean success = false;
-        boolean[] outcome = {invalid_dealerID, invalid_DealerClosed, invalid_carID, success};
 
         //find if dealer exists
         Dealer dealer = null;
@@ -52,40 +50,31 @@ public class AddCar {
         }
         //if dealer does not exist error
         if(dealer == null){
-            outcome[0] = true;
+            invalid_dealerID = true;
         }
         //if dealer is closed error
         else{
             if(!dealer.getIsActivatedStatus()){
-                outcome[1] = true;
+                invalid_DealerClosed = true;
             }
         }
         //if carID is not unique error
         for(Dealer d : listOfDealers){
             for(Vehicle v : d.getListOfCarsAtDealer()){
                 if(v.getVehicle_id().equals(carID)){
-                    outcome[2] = true;
+                    invalid_carID = true;
                 }
             }
         }
-        //if type is not legal error
-        /*
-        ArrayList<String> allowedVehicles = new ArrayList<>();
-        allowedVehicles.add("suv");
-        allowedVehicles.add("pickup");
-        allowedVehicles.add("sports car");
-        allowedVehicles.add("sedan");
-        if(!allowedVehicles.contains(carType)){
-            outcome[3] = true;
-        }
-        */
 
 
         //if there is an error return
-        for(int i = 0; i < outcome.length - 1; i++){
-            if(outcome[i] == true){
-                return outcome;
-            }
+        if(invalid_carID || invalid_dealerID || invalid_DealerClosed){
+            return new boolean[]{
+                    invalid_carID,
+                    invalid_dealerID,
+                    invalid_DealerClosed,
+                    success};
         }
 
         //No errors -> add new car to dealer
@@ -94,10 +83,13 @@ public class AddCar {
         Vehicle car = new Vehicle(carDID, carType, carMake, carModel, carID, vehicle_price, acquisition_date);
         dealer.addToListOfCarsAtDealer(car);
 
-        //Set success outcome
-        outcome[3] = true;
+        success = true;
 
-        return outcome;
+        return new boolean[] {
+                invalid_carID,
+                invalid_dealerID,
+                invalid_DealerClosed,
+                success};
 
     }
 }

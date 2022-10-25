@@ -43,8 +43,6 @@ public class mainMenuGUIController implements Initializable {
     @FXML
     private TextField addCarID;
     @FXML
-    private TextField addCarType;
-    @FXML
     private TextField addCarPrice;
 
     //add car error / success labels
@@ -61,7 +59,7 @@ public class mainMenuGUIController implements Initializable {
 
    //list
     @FXML
-    private ObservableList<Object> carList1 = FXCollections.observableArrayList();
+    private ObservableList<Object> carList1;
     @FXML
     private ListView carList;
 
@@ -69,8 +67,8 @@ public class mainMenuGUIController implements Initializable {
 
     public void readJson(ActionEvent event) throws IOException, ParserConfigurationException, SAXException {
         cmds.readJSON();
-        System.out.println("Hi");
-        this.loadList(event);   
+        loadCarList();
+
     }
 
     public void addCar(ActionEvent event) {
@@ -80,7 +78,10 @@ public class mainMenuGUIController implements Initializable {
         String carID = addCarID.getText();
         String carType = addCarTypeChoiceBox.getValue();
         String carPrice = addCarPrice.getText();
+
         boolean[] outcome = cmds.addCarGUI(carMake, carModel, carDID, carID, carType, carPrice);
+
+        loadCarList();
 
         //set error / success label to not visible
         invalid_CarID.setVisible(false);
@@ -104,36 +105,28 @@ public class mainMenuGUIController implements Initializable {
         if(outcome[3]){
             success.setVisible(true);
         }
+
+        loadCarList();
     }
 
-    public void loadList(ActionEvent...event) throws IOException {
+    public void refresh(ActionEvent event) throws IOException {
+        loadCarList();
+    }
+
+
+    private void loadCarList(){
+
+        carList1 = FXCollections.observableArrayList();
         for (Dealer d : Company.getCompany()) {
             for(Vehicle i: d.getListOfCarsAtDealer()){
-                //This boolean serves to make sure that we do not add duplicates to list
-                boolean b = carList1.contains("Dealer ID: " + i.getDealership_id() + " | Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(i.getAcquisition_date()) + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model() + " | loan status: " + i.getIsLoaned());
-                if (b == false) {
-                    carList1.add("Dealer ID: " + i.getDealership_id() + " | Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(i.getAcquisition_date()) + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model() + " | loan status: " + i.getIsLoaned());
-                }
+                carList1.add("Dealer ID: " + i.getDealership_id() + " | Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(i.getAcquisition_date()) + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model() + " | loan status: " + i.getIsLoaned());
             }
         }
 
 
-        carList.setItems(carList1);
-    }
+            carList.setItems(carList1);
 
-    public void loadList(){
-        for (Dealer d : Company.getCompany()) {
-            for(Vehicle i: d.getListOfCarsAtDealer()){
-                //This boolean serves to make sure that we do not add duplicates to list
-                boolean b = carList1.contains("Dealer ID: " + i.getDealership_id() + " | Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(i.getAcquisition_date()) + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model() + " | loan status: " + i.getIsLoaned());
-                if (b == false) {
-                    carList1.add("Dealer ID: " + i.getDealership_id() + " | Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(i.getAcquisition_date()) + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model() + " | loan status: " + i.getIsLoaned());
-                }
-            }
         }
-
-        carList.setItems(carList1);
-    }
 
     public void switchToDealerGUI(ActionEvent event) throws IOException {
         //Parent root = FXMLLoader.load(getClass().getResource("DealerGUI.fxml"));
@@ -205,7 +198,7 @@ public class mainMenuGUIController implements Initializable {
         File f = new File(serializedDataFilePath);
         if(f.exists() && !f.isDirectory()){
             Controller.Converters.deserializeData(serializedDataFilePath);
-            this.loadList();   
+            loadCarList();   
         }
     }
 }

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="549.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GUIControllers.createDealerGUIController">
+<AnchorPane prefHeight="549.0" prefWidth="902.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.GUIControllers.createDealerGUIController">
     <children>
         <Button layoutX="409.0" layoutY="468.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="25.0" prefWidth="85.0" text="Save &amp; Exit" />
       <Label layoutX="343.0" layoutY="41.0" text="Create Dealer">
@@ -14,10 +14,14 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <TextField layoutX="378.0" layoutY="171.0" />
+      <TextField fx:id="dealerID" layoutX="378.0" layoutY="171.0" />
       <Label layoutX="288.0" layoutY="175.0" text="New Dealer ID:" />
-      <Button layoutX="397.0" layoutY="214.0" mnemonicParsing="false" text="Create this dealer" />
+      <Button layoutX="398.0" layoutY="262.0" mnemonicParsing="false" onAction="#create" text="Create this dealer" />
       <Button layoutX="671.0" layoutY="28.0" mnemonicParsing="false" onAction="#switchToDealerGUI" text="Return to Dealer menu" />
       <Button layoutX="75.0" layoutY="28.0" mnemonicParsing="false" onAction="#switchToMainMenuGUI" text="Return to Main Menu" />
+      <TextField fx:id="dealerName" layoutX="378.0" layoutY="211.0" />
+      <Label layoutX="267.0" layoutY="215.0" text="New Dealer Name:" />
+      <Label fx:id="invalid_DealerID" layoutX="540.0" layoutY="175.0" text="Dealer ID Aleary Exists" textFill="RED" />
+      <Label fx:id="success" layoutX="431.0" layoutY="309.0" text="Success" textFill="GREEN" />
     </children>
 </AnchorPane>

@@ -1,9 +1,7 @@
 package Controller.GUIControllers;
 
 import Controller.CommandManager;
-import Models.Company;
-import Models.Dealer;
-import Models.Vehicle;
+import Controller.Commands.LoanSearch;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,47 +27,41 @@ public class loanCarGUIController implements Initializable {
     @FXML
     private Label invalidCarID;
 
-    private Vehicle currentVehicle;
+    private static String currVehicleID; //string in carIDTextField when search button was clicked
     private CommandManager cmds = new CommandManager();
 
-    public void search(ActionEvent event) throws IOException{
-
-        invalidCarID.setVisible(false);
+    public void loanSearch(ActionEvent event) throws IOException{
 
         String carID = carIDTextField.getText();
-        currentVehicle = null;
-        for(Dealer d : Company.getCompany()){
-            for(Vehicle v : d.getListOfCarsAtDealer()){
-                if(v.getVehicle_id().equals(carID)){
-                    currentVehicle = v;
-                }
-            }
-        }
+        currVehicleID = carIDTextField.getText();
 
+        boolean[] outcome = cmds.loanSearch(carID);
+        boolean invalid_CarID = outcome[0];
+        boolean carLoanedStatus = outcome[1];
+
+
+
+        //error message
+        invalidCarID.setVisible(false);
+        //loan button (only will be shown if carId is valid)
+        loanRadioButton.setVisible(false);
 
         //if car does not exist error
-        if(currentVehicle == null) {
+        if(invalid_CarID){
             invalidCarID.setVisible(true);
-            loanRadioButton.setVisible(false);
-            return;
+        }
+        else{   //if car exists
+            loanRadioButton.setVisible(true);
+
+            loanRadioButton.setSelected(carLoanedStatus);
         }
 
-        loanRadioButton.setVisible(true);
-        if(currentVehicle.getIsLoaned()){
-            loanRadioButton.setSelected(true);
-        }
-        else {
-            loanRadioButton.setSelected(false);
-        }
     }
 
-
-    public void setLoanedStatus(ActionEvent event) throws IOException{
-        if(currentVehicle.getIsLoaned()){
-            currentVehicle.setIsLoaned(false);
-        }
-        else{currentVehicle.setIsLoaned(true);}
+    public void setLoanStatus(ActionEvent event){
+        cmds.setLoanStatus(currVehicleID);
     }
+
     public void switchToMainMenuGUI(ActionEvent event) throws IOException {
         FXMLLoader root = new FXMLLoader(GUI.class.getResource("mainMenuGUI.fxml"));
         Stage stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();

@@ -14,22 +14,23 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <Button layoutX="127.0" layoutY="317.0" mnemonicParsing="false" onAction="#dealerOff" text="Set dealer to OFF" />
+      <Button layoutX="126.0" layoutY="338.0" mnemonicParsing="false" onAction="#dealerOff" text="Set dealer to OFF" />
       <Button layoutX="703.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchToMainMenuGUI" text="Return to main menu" />
-      <TextField fx:id="DealerIDField" layoutX="105.0" layoutY="193.0" />
+      <TextField fx:id="dealerIDField" layoutX="105.0" layoutY="193.0" />
       <Label layoutX="15.0" layoutY="197.0" text="Enter dealer ID :" />
-      <Button layoutX="128.0" layoutY="279.0" mnemonicParsing="false" onAction="#dealerOn" text="Set dealer to ON" />
+      <Button layoutX="127.0" layoutY="300.0" mnemonicParsing="false" onAction="#dealerOn" text="Set dealer to ON" />
       <ListView fx:id="dealerList" layoutX="317.0" layoutY="109.0" prefHeight="339.0" prefWidth="522.0" />
-      <Button layoutX="93.0" layoutY="238.0" mnemonicParsing="false" text="Show Inventory for this dealer" />
+      <Button layoutX="92.0" layoutY="259.0" mnemonicParsing="false" onAction="#showDealerInventory" text="Show Inventory for this dealer" />
       <Label layoutX="406.0" layoutY="123.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="103.0" layoutY="358.0" mnemonicParsing="false" text="Export this dealer to JSON" />
+      <Button layoutX="102.0" layoutY="379.0" mnemonicParsing="false" onAction="#exportToJSON" text="Export this dealer to JSON" />
       <Button layoutX="413.0" layoutY="490.0" mnemonicParsing="false" onAction="#exitProgram" text="Save &amp; Exit" />
-      <Button layoutX="120.0" layoutY="465.0" mnemonicParsing="false" text="Show all Dealers" />
       <Button layoutX="67.0" layoutY="29.0" mnemonicParsing="false" onAction="#switchToCreateDealerGUI" text="Swtch to add dealer" />
-      <Button fx:id="refreshDealer" layoutX="703.0" layoutY="490.0" mnemonicParsing="false" onAction="#refreshList" text="Refresh List" />
+      <Button fx:id="refreshDealer" layoutX="703.0" layoutY="490.0" mnemonicParsing="false" onAction="#refreshDealerList" text="Show All Dealers" />
+      <Label fx:id="label_Invalid_DealerID" layoutX="136.0" layoutY="229.0" text="Invalid Dealer ID" textFill="RED" />
+      <Label fx:id="label_Success" layoutX="99.0" layoutY="415.0" text="Successfully Exported To JSON" textFill="GREEN" />
    </children>
 </AnchorPane>

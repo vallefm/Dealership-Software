@@ -193,23 +193,24 @@ public class Converters {
                 System.out.println("Vehicle not added.");
             }
 
-            if (listOfDealers.size() == 0 && cars.size() > 0) {
+        }
+
+        if (listOfDealers.size() == 0 && cars.size() > 0) {
                 Dealer d = new Dealer(cars.get(0).getDealership_id(), true);
                 //d.setName(dealersNames.get(d.getDealer_id()));
                 listOfDealers.add(d);
-            }
-
-            for(Vehicle car : cars) {
-                Dealer dealer = listOfDealers.stream().filter(d -> d.getDealer_id().equals(car.getDealership_id())).findFirst().orElse(null);
-                if( dealer == null ) {
-                    dealer = new Dealer(car.getDealership_id(), true);
-                    //dealer.setName(dealersNames.get(dealer.getDealer_id()));
-                    listOfDealers.add(dealer);
-                }
-                dealer.addToListOfCarsAtDealer(car);
-            }
-
         }
+        //This method duplicates cars
+        for(Vehicle car : cars) {
+            Dealer dealer = listOfDealers.stream().filter(d -> d.getDealer_id().equals(car.getDealership_id())).findFirst().orElse(null);
+            if( dealer == null ) {
+                dealer = new Dealer(car.getDealership_id(), true);
+                //dealer.setName(dealersNames.get(dealer.getDealer_id()));
+                listOfDealers.add(dealer);
+            }
+            dealer.addToListOfCarsAtDealer(car);
+        }
+
         return listOfDealers;
     }
 
@@ -219,11 +220,11 @@ public class Converters {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         // Json file Dealer
-        String path = "C:\\Users\\Public\\" + dealer.getDealer_id() + ".json";
+        String path = System.getProperty("user.dir")+"\\" + dealer.getDealer_id() + ".json";
         File file = new File(path);
         FileWriter fw;
 
-        //create file and write the dealer inforamtion to it
+        //create file and write the dealer information to it
         try {
             file.createNewFile();
 
@@ -233,11 +234,8 @@ public class Converters {
 
             fw.close();
         } catch (IOException e) {
-            System.out.println("Error: Failed to create or write to Json File");
             throw new RuntimeException(e);
         }
-
-        System.out.println("Your file was sent to C:\\Users\\Public");
 
     }
     public static void deserializeData(String serializedDataPath){
