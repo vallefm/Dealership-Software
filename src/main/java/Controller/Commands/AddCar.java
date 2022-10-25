@@ -9,7 +9,7 @@ import java.util.List;
 
 public class AddCar {
 
-    public boolean[] addCarGUI(String carMake, String carModel, String carDID, String carID, String carType, String carPrice)  {
+    public boolean[] addCarGUI(String carMake, String carModel, String carDID, String carID, String carType, String carPrice, String curencyType)  {
 
 
 //        for (int i = 0; i < listOfDealers.size(); i++) {
@@ -81,6 +81,7 @@ public class AddCar {
         int vehicle_price = Integer.parseInt(carPrice);
         long acquisition_date = System.currentTimeMillis();
         Vehicle car = new Vehicle(carDID, carType, carMake, carModel, carID, vehicle_price, acquisition_date);
+        car.setCurrencyType(curencyType);
         dealer.addToListOfCarsAtDealer(car);
 
         success = true;

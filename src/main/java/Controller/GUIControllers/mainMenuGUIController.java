@@ -78,8 +78,9 @@ public class mainMenuGUIController implements Initializable {
         String carID = addCarID.getText();
         String carType = addCarTypeChoiceBox.getValue();
         String carPrice = addCarPrice.getText();
+        String currencyType = currencyChoiceBox.getValue();
 
-        boolean[] outcome = cmds.addCarGUI(carMake, carModel, carDID, carID, carType, carPrice);
+        boolean[] outcome = cmds.addCarGUI(carMake, carModel, carDID, carID, carType, carPrice, currencyType);
 
         loadCarList();
 
