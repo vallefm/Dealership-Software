@@ -55,8 +55,8 @@ public class mainMenuGUIController implements Initializable {
 
     @FXML
     private ChoiceBox<String> addCarTypeChoiceBox;
-
-
+    @FXML
+    private ChoiceBox<String> currencyChoiceBox;
    //list
     @FXML
     private ObservableList<Object> carList1;
@@ -119,7 +119,7 @@ public class mainMenuGUIController implements Initializable {
         carList1 = FXCollections.observableArrayList();
         for (Dealer d : Company.getCompany()) {
             for(Vehicle i: d.getListOfCarsAtDealer()){
-                carList1.add("Dealer ID: " + i.getDealership_id() + " | Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(i.getAcquisition_date()) + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model() + " | loan status: " + i.getIsLoaned());
+                carList1.add("Dealer ID: " + i.getDealership_id() + " | Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getCurrencyType() + i.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(i.getAcquisition_date()) + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model() + " | loan status: " + i.getIsLoaned());
             }
         }
 
@@ -192,6 +192,7 @@ public class mainMenuGUIController implements Initializable {
 
         //Populate the carTypeChoiceBox with allowed vehicle type
         addCarTypeChoiceBox.getItems().addAll(allowedCarType);
+        currencyChoiceBox.getItems().addAll("Dollars","Pounds");
 
 
         String serializedDataFilePath = System.getProperty("user.dir") + "\\company-serialized-data.ser";
