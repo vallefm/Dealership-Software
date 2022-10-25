@@ -81,7 +81,12 @@ public class AddCar {
         int vehicle_price = Integer.parseInt(carPrice);
         long acquisition_date = System.currentTimeMillis();
         Vehicle car = new Vehicle(carDID, carType, carMake, carModel, carID, vehicle_price, acquisition_date);
-        car.setCurrencyType(curencyType);
+        if(curencyType.equalsIgnoreCase("pounds")){
+            car.setCurrencyType("£");
+        }else{
+            car.setCurrencyType("$");
+        }
+
         dealer.addToListOfCarsAtDealer(car);
 
         success = true;

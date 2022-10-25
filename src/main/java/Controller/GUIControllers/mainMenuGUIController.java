@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class mainMenuGUIController implements Initializable {
@@ -120,7 +121,11 @@ public class mainMenuGUIController implements Initializable {
         carList1 = FXCollections.observableArrayList();
         for (Dealer d : Company.getCompany()) {
             for(Vehicle i: d.getListOfCarsAtDealer()){
-                carList1.add("Dealer ID: " + i.getDealership_id() + " | Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getCurrencyType() + i.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(i.getAcquisition_date()) + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model() + " | loan status: " + i.getIsLoaned());
+                //the time bit. I'm taking the
+                //year only from it
+                // so I split it at T and take the first half of the split which will always be
+                // YEAR-MONTH-DAY
+                carList1.add("Dealer ID: " + i.getDealership_id() + " | Car ID: " + i.getVehicle_id() + " | Car Price: " + i.getCurrencyType() + i.getPrice() + " | Car Acquisition Date: " + (Instant.ofEpochMilli(i.getAcquisition_date()).toString()).split("T")[0] + " | vehicle type: " + i.getVehicle_type() + " | vehicle manufacturer: " + i.getVehicle_manufacturer() + " | vehicle model: " + i.getVehicle_model() + " | loan status: " + i.getIsLoaned());
             }
         }
 
