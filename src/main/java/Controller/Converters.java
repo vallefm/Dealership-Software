@@ -65,7 +65,18 @@ public class Converters {
                 Long aDate = System.currentTimeMillis();
                 String dName = null;
 
-                String unit = element.getElementsByTagName("Price").item(0).getAttributes().getNamedItem("unit").getTextContent();
+                Node attr = element.getElementsByTagName("Price").item(0).getAttributes().getNamedItem("unit");
+                String unit = "";
+
+                if(attr != null){
+
+                    unit = attr.getTextContent();
+
+                }
+
+
+
+
                 if(node.getParentNode().getNodeType() == Node.ELEMENT_NODE){
                     Element parentElement = (Element) node.getParentNode();
                     if(parentElement.getElementsByTagName("Name").getLength() > 0){
@@ -101,6 +112,10 @@ public class Converters {
 //
 //                    }
                     cars.add(car);
+                    if(unit.equalsIgnoreCase("pounds")){
+                        car.setCurrencyType("£");
+                    }
+
                 } else {
                     //if a non allowed car is read, do not add it to cars
                     System.out.println("Vehicle Type of " + type + " is not allowed for vehicle ID: "

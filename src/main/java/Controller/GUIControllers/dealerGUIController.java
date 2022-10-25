@@ -131,7 +131,7 @@ public class dealerGUIController implements Initializable {
             dealerList1.add("======================================================");
 
             for (Vehicle v : currDealer.getListOfCarsAtDealer()) {
-                dealerList1.add("Dealer ID: " + v.getDealership_id() + " | Car ID: " + v.getVehicle_id() + " | Car Price: " + v.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(v.getAcquisition_date()) + " | vehicle type: " + v.getVehicle_type() + " | vehicle manufacturer: " + v.getVehicle_manufacturer() + " | vehicle model: " + v.getVehicle_model() + " | loan status: " + v.getIsLoaned());
+                dealerList1.add("Dealer ID: " + v.getDealership_id() + " | Car ID: " + v.getVehicle_id() + " | Car Price: " + v.getCurrencyType() + v.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(v.getAcquisition_date()) + " | vehicle type: " + v.getVehicle_type() + " | vehicle manufacturer: " + v.getVehicle_manufacturer() + " | vehicle model: " + v.getVehicle_model() + " | loan status: " + v.getIsLoaned());
             }
         }
         dealerList.setItems(dealerList1);
