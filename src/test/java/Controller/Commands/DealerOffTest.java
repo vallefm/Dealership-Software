@@ -18,8 +18,10 @@ class DealerOffTest {
 
         DealerOff df = new DealerOff();
 
+        //Turns off dealer with specific id
         df.dealerOff(dealerId);
 
+        //If dealer is off, it should return string Deactivated when retrieving the getAtctivatedStatus
         assertEquals("Deactivated", Company.getCompany().get(0).getActivatedStatus());
     }
 }
