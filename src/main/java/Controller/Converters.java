@@ -1,9 +1,6 @@
 package Controller;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,7 +13,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
-
+import Models.Company;
 import Models.Vehicle;
 import Models.Dealer;
 
@@ -68,7 +65,18 @@ public class Converters {
                 Long aDate = System.currentTimeMillis();
                 String dName = null;
 
-                String unit = element.getElementsByTagName("Price").item(0).getAttributes().getNamedItem("unit").getTextContent();
+                Node attr = element.getElementsByTagName("Price").item(0).getAttributes().getNamedItem("unit");
+                String unit = "";
+
+                if(attr != null){
+
+                    unit = attr.getTextContent();
+
+                }
+
+
+
+
                 if(node.getParentNode().getNodeType() == Node.ELEMENT_NODE){
                     Element parentElement = (Element) node.getParentNode();
                     if(parentElement.getElementsByTagName("Name").getLength() > 0){
@@ -104,6 +112,10 @@ public class Converters {
 //
 //                    }
                     cars.add(car);
+                    if(unit.equalsIgnoreCase("pounds")){
+                        car.setCurrencyType("£");
+                    }
+
                 } else {
                     //if a non allowed car is read, do not add it to cars
                     System.out.println("Vehicle Type of " + type + " is not allowed for vehicle ID: "
@@ -196,23 +208,24 @@ public class Converters {
                 System.out.println("Vehicle not added.");
             }
 
-            if (listOfDealers.size() == 0 && cars.size() > 0) {
+        }
+
+        if (listOfDealers.size() == 0 && cars.size() > 0) {
                 Dealer d = new Dealer(cars.get(0).getDealership_id(), true);
                 //d.setName(dealersNames.get(d.getDealer_id()));
                 listOfDealers.add(d);
-            }
-
-            for(Vehicle car : cars) {
-                Dealer dealer = listOfDealers.stream().filter(d -> d.getDealer_id().equals(car.getDealership_id())).findFirst().orElse(null);
-                if( dealer == null ) {
-                    dealer = new Dealer(car.getDealership_id(), true);
-                    //dealer.setName(dealersNames.get(dealer.getDealer_id()));
-                    listOfDealers.add(dealer);
-                }
-                dealer.addToListOfCarsAtDealer(car);
-            }
-
         }
+        //This method duplicates cars
+        for(Vehicle car : cars) {
+            Dealer dealer = listOfDealers.stream().filter(d -> d.getDealer_id().equals(car.getDealership_id())).findFirst().orElse(null);
+            if( dealer == null ) {
+                dealer = new Dealer(car.getDealership_id(), true);
+                //dealer.setName(dealersNames.get(dealer.getDealer_id()));
+                listOfDealers.add(dealer);
+            }
+            dealer.addToListOfCarsAtDealer(car);
+        }
+
         return listOfDealers;
     }
 
@@ -222,11 +235,11 @@ public class Converters {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         // Json file Dealer
-        String path = "C:\\Users\\Public\\" + dealer.getDealer_id() + ".json";
+        String path = System.getProperty("user.dir")+"\\" + dealer.getDealer_id() + ".json";
         File file = new File(path);
         FileWriter fw;
 
-        //create file and write the dealer inforamtion to it
+        //create file and write the dealer information to it
         try {
             file.createNewFile();
 
@@ -236,11 +249,38 @@ public class Converters {
 
             fw.close();
         } catch (IOException e) {
-            System.out.println("Error: Failed to create or write to Json File");
             throw new RuntimeException(e);
         }
 
-        System.out.println("Your file was sent to C:\\Users\\Public");
+    }
+    public static void deserializeData(String serializedDataPath){
+        List<Vehicle> listOfVehicles = null;
+        try {
 
+            // This block of code  of creates an object of arrayList containing the vehicle objects to be loaded into our program further down
+            FileInputStream serializedDataFile = new FileInputStream(serializedDataPath);
+            ObjectInputStream inputObjects = new ObjectInputStream(serializedDataFile);
+            listOfVehicles = (List<Vehicle>)inputObjects.readObject();
+            serializedDataFile.close();
+            inputObjects.close();            
+        
+            // With this enhanced for loop we will loop through our arraylist created earlier from the serialized file and create dealer objects and assign each vehicle to the approriate dealer object. 
+            for(Vehicle v : listOfVehicles){
+
+                //this creates a dealer based on the current vehicle's dealership and then adds that dealer to the Company.getCompany() list of dealers if it is not already in it.
+                Dealer currDealer = new Dealer(v.getDealership_id(), true);
+                currDealer.getListOfCarsAtDealer().add(v); //can probably clean up this syntax and create a vehicle method to add this vehicle to the dealership class's list of vehicles.
+                if(!Company.getCompany().contains(currDealer)){
+                    Company.getCompany().add(currDealer);
+                }
+            }
+
+         } catch (IOException i) {
+            i.printStackTrace();
+            System.out.println("fail ioexception deserialize");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            System.out.println("fail classnotfoundexception deserialize");
+        }
     }
 }

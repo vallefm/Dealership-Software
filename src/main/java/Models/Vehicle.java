@@ -1,6 +1,8 @@
 package Models;
 
-public class Vehicle {
+import java.time.Instant;
+
+public class Vehicle implements java.io.Serializable{
 
     // Model
     private String dealership_id;
@@ -9,6 +11,8 @@ public class Vehicle {
     private String vehicle_model;
     private String vehicle_id;
     private int price;
+
+    private String currencyType = "$";
     private long acquisition_date;
 
     private boolean isLoaned;
@@ -22,6 +26,10 @@ public class Vehicle {
         this.price = price;
         this.acquisition_date = acquisition_date;
         this.isLoaned = false;
+    }
+
+    public void setCurrencyType(String unit){
+        this.currencyType = unit;
     }
 
     //this will set the dealership ID to whatever string is input for dealership_ID
@@ -62,6 +70,9 @@ public class Vehicle {
     public void setIsLoaned(boolean bool){this.isLoaned = bool;}
 
 
+    public String getCurrencyType(){
+        return this.currencyType;
+    }
     public boolean getIsLoaned(){
         return this.isLoaned;
     }
@@ -91,6 +102,10 @@ public class Vehicle {
 
     public long getAcquisition_date() {
         return acquisition_date;
+    }
+    public String toString(){
+        String someString =  "Car ID: " + this.getVehicle_id() + " | Car Price: " + this.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(this.getAcquisition_date()) + " | vehicle type: " + this.getVehicle_type() + " | vehicle manufacturer: " + this.getVehicle_manufacturer() + " | vehicle model: " + this.getVehicle_model();
+        return someString;
     }
 
 }

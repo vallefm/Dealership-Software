@@ -4,12 +4,12 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dealer {
+public class Dealer{
 
-    private boolean isActivated = true;
-    private String dealer_id;
-    private String dealer_name = "";
-    List<Vehicle> listOfCarsAtDealer = new ArrayList<Vehicle>();
+     public boolean isActivated = true;
+     private String dealer_id;
+     private String dealer_name = "";
+     private List<Vehicle> listOfCarsAtDealer = new ArrayList<Vehicle>();
 
     public void getAllCarsID() {
         for (Vehicle i : listOfCarsAtDealer) {
@@ -75,6 +75,11 @@ public class Dealer {
     public Dealer(String id, boolean status) {
         dealer_id = id;
         isActivated = status;
+    }
+
+    public Dealer(String id, String dealerName){
+        this.dealer_id = id;
+        this.dealer_name = dealerName;
     }
 
     public Dealer() {

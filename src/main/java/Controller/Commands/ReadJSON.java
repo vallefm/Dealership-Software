@@ -19,7 +19,7 @@ public class ReadJSON {
     public void readJSON() throws IOException, ParserConfigurationException, SAXException {
         JButton open = new JButton();
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setCurrentDirectory(new File("C:/Users"));
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
         // Titles the text box
         fileChooser.setDialogTitle("JSON file to Converter");
         if (fileChooser.showOpenDialog(open) == JFileChooser.APPROVE_OPTION) {
@@ -29,7 +29,6 @@ public class ReadJSON {
         String fileAbsolutePath = fileChooser.getSelectedFile().getAbsolutePath();
 
         List<Dealer> listOfDealers;
-        List<Vehicle> listOfCars = new ArrayList<>();
 
 
         //list of dealers contains all cars read from json file
@@ -42,6 +41,7 @@ public class ReadJSON {
             FileReader file = new FileReader(fileAbsolutePath);
             listOfDealers = c.fromJsonToInvArr(file);
         }
+
 
 
         //////////////////////////////
@@ -68,6 +68,8 @@ public class ReadJSON {
             }
         }
 
+
+
         //get dealerIDs for all dealers in Company
         List<String> companyDealerIDs = new ArrayList<>();
         for(Dealer d : Company.getCompany()){
@@ -81,7 +83,6 @@ public class ReadJSON {
                 Company.getCompany().add(d);
                 deleteFromListOfDealers.add(d);
             }
-
         }
 
         //delete the dealers that have been added to Company
