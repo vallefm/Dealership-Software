@@ -64,12 +64,18 @@ public class Converters {
                 String model = element.getElementsByTagName("Model").item(0).getTextContent();
                 Long aDate = System.currentTimeMillis();
                 String dName = null;
+
+                Node attr = element.getElementsByTagName("Price").item(0).getAttributes().getNamedItem("unit");
                 String unit = "";
-                try{
-                    unit = element.getElementsByTagName("Price").item(0).getAttributes().getNamedItem("unit").getTextContent();
-                }catch(NullPointerException e){
-                    // quiet no nothing
+
+                if(attr != null){
+
+                    unit = attr.getTextContent();
+
                 }
+
+
+
 
                 if(node.getParentNode().getNodeType() == Node.ELEMENT_NODE){
                     Element parentElement = (Element) node.getParentNode();
