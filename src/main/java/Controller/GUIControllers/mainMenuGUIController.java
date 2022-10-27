@@ -117,8 +117,11 @@ public class mainMenuGUIController implements Initializable {
 
 
     private void loadCarList(){
-
-        carList1 = FXCollections.observableArrayList();
+        if(carList1 == null){
+            carList1 = FXCollections.observableArrayList();
+            carList.setItems(carList1);
+        }
+        carList1.clear();
         for (Dealer d : Company.getCompany()) {
             for(Vehicle i: d.getListOfCarsAtDealer()){
                 //the time bit. I'm taking the
@@ -130,7 +133,7 @@ public class mainMenuGUIController implements Initializable {
         }
 
 
-            carList.setItems(carList1);
+
 
         }
 
@@ -160,9 +163,6 @@ public class mainMenuGUIController implements Initializable {
         stage.show();
     }
 
-    public void exitProgram() {
-        System.exit(0);
-    }
 
     public void saveAndExit(ActionEvent event) {
         cmds.saveAndExit();
@@ -200,12 +200,7 @@ public class mainMenuGUIController implements Initializable {
         addCarTypeChoiceBox.getItems().addAll(allowedCarType);
         currencyChoiceBox.getItems().addAll("Dollars","Pounds");
 
+        loadCarList();
 
-        String serializedDataFilePath = System.getProperty("user.dir") + "\\company-serialized-data.ser";
-        File f = new File(serializedDataFilePath);
-        if(f.exists() && !f.isDirectory()){
-            Controller.Converters.deserializeData(serializedDataFilePath);
-            loadCarList();   
-        }
     }
 }

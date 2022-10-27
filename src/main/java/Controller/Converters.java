@@ -254,26 +254,16 @@ public class Converters {
 
     }
     public static void deserializeData(String serializedDataPath){
-        List<Vehicle> listOfVehicles = null;
+        List<Dealer> listOfDealers = null;
         try {
 
             // This block of code  of creates an object of arrayList containing the vehicle objects to be loaded into our program further down
             FileInputStream serializedDataFile = new FileInputStream(serializedDataPath);
             ObjectInputStream inputObjects = new ObjectInputStream(serializedDataFile);
-            listOfVehicles = (List<Vehicle>)inputObjects.readObject();
+            listOfDealers = (List<Dealer>)inputObjects.readObject();
             serializedDataFile.close();
             inputObjects.close();            
-        
-            // With this enhanced for loop we will loop through our arraylist created earlier from the serialized file and create dealer objects and assign each vehicle to the approriate dealer object. 
-            for(Vehicle v : listOfVehicles){
-
-                //this creates a dealer based on the current vehicle's dealership and then adds that dealer to the Company.getCompany() list of dealers if it is not already in it.
-                Dealer currDealer = new Dealer(v.getDealership_id(), true);
-                currDealer.getListOfCarsAtDealer().add(v); //can probably clean up this syntax and create a vehicle method to add this vehicle to the dealership class's list of vehicles.
-                if(!Company.getCompany().contains(currDealer)){
-                    Company.getCompany().add(currDealer);
-                }
-            }
+            Company.getCompany().addAll(listOfDealers);
 
          } catch (IOException i) {
             i.printStackTrace();

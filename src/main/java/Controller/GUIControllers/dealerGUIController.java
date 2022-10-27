@@ -165,6 +165,7 @@ public class dealerGUIController implements Initializable {
     }
 
     public void exitProgram() {
+        cmds.saveAndExit();
         System.exit(0);
     }
 
