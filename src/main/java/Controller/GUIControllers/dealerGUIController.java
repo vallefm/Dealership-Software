@@ -38,6 +38,7 @@ public class dealerGUIController implements Initializable {
     private ObservableList<Object> dealerList1;
     @FXML
     private ListView dealerList;
+
     private CommandManager cmds = new CommandManager();
 
 
