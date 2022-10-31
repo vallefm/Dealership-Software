@@ -70,6 +70,7 @@ public class loanCarGUIController implements Initializable {
         stage.show();
     }
     public void exitProgram() {
+        cmds.saveAndExit();
         System.exit(0);
     }
 

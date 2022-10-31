@@ -5,6 +5,8 @@ import Controller.CommandManager;
 import Models.Company;
 import Models.Dealer;
 import Models.Vehicle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -165,6 +167,7 @@ public class dealerGUIController implements Initializable {
     }
 
     public void exitProgram() {
+        cmds.saveAndExit();
         System.exit(0);
     }
 
@@ -175,5 +178,20 @@ public class dealerGUIController implements Initializable {
 
 
         loadDealerList();
+
+        dealerList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                String dealerId = "Dealer ID: ";
+                if(newValue != null && newValue.toString().contains(dealerId)){
+                    int start = newValue.toString().indexOf(dealerId)+dealerId.length();
+
+                    int end = newValue.toString().indexOf("|");
+                    String dId = newValue.toString().substring(start,end).trim();
+                    dealerIDField.setText(dId);
+                }
+
+            }
+        });
     }
 }

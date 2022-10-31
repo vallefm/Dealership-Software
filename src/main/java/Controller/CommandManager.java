@@ -29,9 +29,9 @@ public class CommandManager {
         Controller.Commands.DealerOn command = new Controller.Commands.DealerOn();
         command.dealerOn(dealerID);
     }
-    public boolean[] addCarGUI(String carMake, String carModel, String carDID, String carID, String carType, String carPrice){
+    public boolean[] addCarGUI(String carMake, String carModel, String carDID, String carID, String carType, String carPrice, String currencyType){
         Controller.Commands.AddCar command = new Controller.Commands.AddCar();
-        return command.addCarGUI(carMake, carModel, carDID, carID, carType, carPrice);
+        return command.addCarGUI(carMake, carModel, carDID, carID, carType, carPrice, currencyType);
     }
     public boolean[] transferCar(String fromDealer, String carID, String toDealer){
         Controller.Commands.TransferCar command = new Controller.Commands.TransferCar();

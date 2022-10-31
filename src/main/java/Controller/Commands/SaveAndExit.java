@@ -27,21 +27,21 @@ public class SaveAndExit {
        String serializedDataFilePath = System.getProperty("user.dir") + "\\company-serialized-data.ser";
 
         try {
-        
+
         //get a list of every vehicle so we can store the vehicles into a serialized list later on.
         ArrayList<Vehicle> vehicleList = new ArrayList<Vehicle>();
-        for(Dealer d: Company.getCompany()){
-            for(Vehicle v : d.getListOfCarsAtDealer()){
-                vehicleList.add(v);
-            }
-        }
+//        for(Dealer d: Company.getCompany()){
+//            for(Vehicle v : d.getListOfCarsAtDealer()){
+//                vehicleList.add(v);
+//            }
+//        }
 
         //create an ouput file named company-serialized-data.ser (serialized extension)
         FileOutputStream fileOut = new FileOutputStream(serializedDataFilePath);
         ObjectOutputStream out = new ObjectOutputStream(fileOut);
 
         //we proceed to serialize the list of vehicles to the specified filepath.
-        out.writeObject(vehicleList);
+        out.writeObject(Company.getCompany());
         out.close();
         fileOut.close();
      } catch (IOException i) {

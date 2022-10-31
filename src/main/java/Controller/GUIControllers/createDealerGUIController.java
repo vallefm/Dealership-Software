@@ -67,6 +67,7 @@ public class createDealerGUIController implements Initializable {
 
 
     public void exitProgram() {
+        cmds.saveAndExit();
         System.exit(0);
     }
 
