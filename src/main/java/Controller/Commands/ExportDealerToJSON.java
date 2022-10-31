@@ -4,8 +4,6 @@ import Controller.Converters;
 import Models.Company;
 import Models.Dealer;
 
-import java.util.List;
-
 public class ExportDealerToJSON {
 
     public boolean exportDealerToJSON(String dealerID) {
@@ -31,6 +29,7 @@ public class ExportDealerToJSON {
             
             c.convertToJson(dealer);
         }
+        
         return invalid_DealerID;
     }
 }

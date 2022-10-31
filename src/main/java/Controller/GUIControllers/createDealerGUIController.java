@@ -65,9 +65,8 @@ public class createDealerGUIController implements Initializable {
         stage.show();
     }
 
-
     public void exitProgram() {
-        cmds.saveAndExit();
+        cmds.saveSerializedData();
         System.exit(0);
     }
 

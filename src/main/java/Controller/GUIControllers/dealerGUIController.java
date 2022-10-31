@@ -49,8 +49,8 @@ public class dealerGUIController implements Initializable {
         cmds.dealerOn(dealerID);
 
         loadDealerInventory();
-
     }
+
     public void dealerOff(ActionEvent event) {
 
         hideMessages();
@@ -59,12 +59,9 @@ public class dealerGUIController implements Initializable {
         cmds.dealerOff(dealerID);
 
         loadDealerInventory();
-
     }
-    
 
     public void exportToJSON(ActionEvent event){
-
 
         String dealerID = dealerIDField.getText();
 
@@ -74,41 +71,41 @@ public class dealerGUIController implements Initializable {
         //Error / Success message
         hideMessages();
 
-
         if(invalid_DealerID){
+
             label_Invalid_DealerID.setVisible(true);
             loadDealerList();
         }else{
+
             loadDealerInventory();
             label_Success.setVisible(true);
         }
     }
 
     public void hideMessages(){
+
         label_Invalid_DealerID.setVisible(false);
         label_Success.setVisible(false);
     }
 
     public void showDealerInventory(ActionEvent event){
+
         hideMessages();
         loadDealerInventory();
     }
 
 
     public void refreshDealerList(ActionEvent event) throws IOException {
+
         hideMessages();
         loadDealerList();
-
     }
 
 
     private void loadDealerInventory(){
 
-
-
         //clear current display
         dealerList1 = FXCollections.observableArrayList();
-
 
         String dealerID = dealerIDField.getText();
 
@@ -116,16 +113,20 @@ public class dealerGUIController implements Initializable {
 
         //find dealer
         for(Dealer d : Company.getCompany()){
+
             if(dealerID.equals(d.getDealer_id())){
+
                 currDealer = d;
             }
         }
 
         //show error label if dealer not found
         if(currDealer == null){
+
             label_Invalid_DealerID.setVisible(true);
             loadDealerList();
         }else {
+
             label_Invalid_DealerID.setVisible(false);
 
             //display
@@ -133,14 +134,16 @@ public class dealerGUIController implements Initializable {
             dealerList1.add("======================================================");
 
             for (Vehicle v : currDealer.getListOfCarsAtDealer()) {
+
                 dealerList1.add("Dealer ID: " + v.getDealership_id() + " | Car ID: " + v.getVehicle_id() + " | Car Price: " + v.getCurrencyType() + v.getPrice() + " | Car Acquisition Date: " + Instant.ofEpochMilli(v.getAcquisition_date()) + " | vehicle type: " + v.getVehicle_type() + " | vehicle manufacturer: " + v.getVehicle_manufacturer() + " | vehicle model: " + v.getVehicle_model() + " | loan status: " + v.getIsLoaned());
             }
         }
-        dealerList.setItems(dealerList1);
 
+        dealerList.setItems(dealerList1);
     }
 
     private void loadDealerList(){
+        
         dealerList1 = FXCollections.observableArrayList();
 
         for (Dealer d : Company.getCompany()) {
@@ -151,6 +154,7 @@ public class dealerGUIController implements Initializable {
     }
 
     public void switchToCreateDealerGUI(ActionEvent event) throws IOException {
+
         //Parent root = FXMLLoader.load(getClass().getResource("createDealerGUI.fxml"));
         FXMLLoader root = new FXMLLoader(GUI.class.getResource("createDealerGUI.fxml"));
         Stage stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -158,7 +162,9 @@ public class dealerGUIController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
     public void switchToMainMenuGUI(ActionEvent event) throws IOException {
+
         FXMLLoader root = new FXMLLoader(GUI.class.getResource("mainMenuGUI.fxml"));
         Stage stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root.load());
@@ -167,7 +173,8 @@ public class dealerGUIController implements Initializable {
     }
 
     public void exitProgram() {
-        cmds.saveAndExit();
+
+        cmds.saveSerializedData();
         System.exit(0);
     }
 
@@ -175,7 +182,6 @@ public class dealerGUIController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         hideMessages();
-
 
         loadDealerList();
 

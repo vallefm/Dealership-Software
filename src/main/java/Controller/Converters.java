@@ -69,8 +69,10 @@ public class Converters {
                 }
 
                 if(node.getParentNode().getNodeType() == Node.ELEMENT_NODE){
+
                     Element parentElement = (Element) node.getParentNode();
                     if(parentElement.getElementsByTagName("Name").getLength() > 0){
+
                         dName = parentElement.getElementsByTagName("Name").item(0).getTextContent();
                         dealersNames.put(dId, dName);
                     }
@@ -78,6 +80,7 @@ public class Converters {
 
                 //temp
                 if (allowedVehicles.contains(type)) {
+
                     Vehicle car = new Vehicle(
                             dId,
                             type,
@@ -87,10 +90,13 @@ public class Converters {
                             Integer.parseInt(price),
                             aDate);
                     cars.add(car);
+
                     if(unit.equalsIgnoreCase("pounds")){
+
                         car.setCurrencyType("£");
                     }
                 } else {
+
                     //if a non allowed car is read, do not add it to cars
                     System.out.println("Vehicle Type of " + type + " is not allowed for vehicle ID: "
                             + vId);
@@ -102,25 +108,32 @@ public class Converters {
         // if listOfDealers is empty, add the dealer of the first car in listOfCars to
         // listOfDealers
         if (listOfDealers.size() == 0 && cars.size() > 0) {
+
             Dealer d = new Dealer(cars.get(0).getDealership_id(), true);
             d.setName(dealersNames.get(d.getDealer_id()));
             listOfDealers.add(d);
         }
 
         for(Vehicle car : cars) {
+
             Dealer dealer = listOfDealers.stream().filter(d -> d.getDealer_id().equals(car.getDealership_id())).findFirst().orElse(null);
+            
                 if( dealer == null ) {
+
                     dealer = new Dealer(car.getDealership_id(), true);
                     dealer.setName(dealersNames.get(dealer.getDealer_id()));
                     listOfDealers.add(dealer);
                 }
+
             dealer.addToListOfCarsAtDealer(car);
         }
+
         //Once done
         return listOfDealers;
-
     }
+
     public List<Dealer> fromJsonToInvArr(FileReader json) {
+
         List<Dealer> listOfDealers = new ArrayList<>();
 
         JsonObject obj = JsonParser.parseReader(json).getAsJsonObject();
@@ -139,7 +152,9 @@ public class Converters {
         for (JsonElement c : jCars) {
 
             String vehicleTypeString = c.getAsJsonObject().get("vehicle_type").getAsString();
+
             if (allowedVehicles.contains(vehicleTypeString)) {
+
                 Vehicle car = new Vehicle(
                         c.getAsJsonObject().get("dealership_id").getAsString(),
                         c.getAsJsonObject().get("vehicle_type").getAsString(),
@@ -150,6 +165,7 @@ public class Converters {
                         c.getAsJsonObject().get("acquisition_date").getAsLong());
                 cars.add(car);
             } else {
+
                 //if a non allowed car is read, do not add it to cars
                 System.out.println("Vehicle Type of " + vehicleTypeString + " is not allowed for vehicle ID: "
                         + c.getAsJsonObject().get("vehicle_id").getAsString());
@@ -158,6 +174,7 @@ public class Converters {
         }
 
         if (listOfDealers.size() == 0 && cars.size() > 0) {
+
                 Dealer d = new Dealer(cars.get(0).getDealership_id(), true);
                 //d.setName(dealersNames.get(d.getDealer_id()));
                 listOfDealers.add(d);
@@ -165,12 +182,15 @@ public class Converters {
 
         //This method duplicates cars
         for(Vehicle car : cars) {
+
             Dealer dealer = listOfDealers.stream().filter(d -> d.getDealer_id().equals(car.getDealership_id())).findFirst().orElse(null);
             if( dealer == null ) {
+
                 dealer = new Dealer(car.getDealership_id(), true);
                 //dealer.setName(dealersNames.get(dealer.getDealer_id()));
                 listOfDealers.add(dealer);
             }
+
             dealer.addToListOfCarsAtDealer(car);
         }
 
@@ -189,6 +209,7 @@ public class Converters {
 
         //create file and write the dealer information to it
         try {
+
             file.createNewFile();
 
             fw = new FileWriter(file);
@@ -197,10 +218,11 @@ public class Converters {
 
             fw.close();
         } catch (IOException e) {
+
             throw new RuntimeException(e);
         }
-
     }
+
     public static void deserializeData(String serializedDataPath){
         List<Dealer> listOfDealers = null;
         try {
@@ -213,10 +235,12 @@ public class Converters {
             inputObjects.close();            
             Company.getCompany().addAll(listOfDealers);
 
-         } catch (IOException i) {
+        } catch (IOException i) {
+
             i.printStackTrace();
             System.out.println("fail ioexception deserialize");
         } catch (ClassNotFoundException e) {
+
             e.printStackTrace();
             System.out.println("fail classnotfoundexception deserialize");
         }

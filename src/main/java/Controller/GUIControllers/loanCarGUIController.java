@@ -1,7 +1,6 @@
 package Controller.GUIControllers;
 
 import Controller.CommandManager;
-import Controller.Commands.LoanSearch;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class loanCarGUIController implements Initializable {
+public class loanCarGUIController implements Initializable{
 
     @FXML
     private RadioButton loanRadioButton;
@@ -39,41 +38,44 @@ public class loanCarGUIController implements Initializable {
         boolean invalid_CarID = outcome[0];
         boolean carLoanedStatus = outcome[1];
 
-
-
         //error message
         invalidCarID.setVisible(false);
+
         //loan button (only will be shown if carId is valid)
         loanRadioButton.setVisible(false);
 
         //if car does not exist error
         if(invalid_CarID){
+
             invalidCarID.setVisible(true);
         }
         else{   //if car exists
-            loanRadioButton.setVisible(true);
 
+            loanRadioButton.setVisible(true);
             loanRadioButton.setSelected(carLoanedStatus);
         }
 
     }
 
     public void setLoanStatus(ActionEvent event){
+
         cmds.setLoanStatus(currVehicleID);
     }
 
-    public void switchToMainMenuGUI(ActionEvent event) throws IOException {
+    public void switchToMainMenuGUI(ActionEvent event) throws IOException{
+
         FXMLLoader root = new FXMLLoader(GUI.class.getResource("mainMenuGUI.fxml"));
         Stage stage = (Stage) (Stage)((Node)event.getSource()).getScene().getWindow();
         Scene scene = new Scene(root.load());
         stage.setScene(scene);
         stage.show();
     }
-    public void exitProgram() {
-        cmds.saveAndExit();
+
+    public void exitProgram(){
+
+        cmds.saveSerializedData();
         System.exit(0);
     }
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
