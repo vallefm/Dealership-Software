@@ -12,8 +12,7 @@ public class DealerOff {
         List<Dealer> listOfDealers = Company.getCompany();
 
         boolean dealershipIDFound = false;
-        //outputMessage2 = "";
-        //System.out.println("Enter the dealer id of the dealership: ");
+        
         String dealerId = dealer_ID;
 
         for (int i = 0; i < listOfDealers.size(); i++) {
@@ -27,9 +26,6 @@ public class DealerOff {
 
         if(dealershipIDFound == false){
             System.out.println("Dealership ID " + dealerId + " does not exist.\n");
-
-            //System.out.println("Press enter to continue");
-            //input.nextLine();
         }
 
         //resets dealershipIDFound

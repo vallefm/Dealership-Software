@@ -14,10 +14,13 @@ public class ExportDealerToJSON {
 
         boolean invalid_DealerID = true;
 
-        //find dealer
         Dealer dealer = null;
+
+        //find dealer
         for(Dealer d : Company.getCompany()){
+
             if(d.getDealer_id().equals(dealerID)){
+
                 dealer = d;
                 invalid_DealerID = false; //dealer found
             }
@@ -25,9 +28,9 @@ public class ExportDealerToJSON {
 
         //if dealer found, export to JSON
         if(! invalid_DealerID){
+            
             c.convertToJson(dealer);
         }
         return invalid_DealerID;
-
     }
 }

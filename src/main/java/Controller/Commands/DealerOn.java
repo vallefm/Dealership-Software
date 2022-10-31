@@ -13,12 +13,10 @@ public class DealerOn {
 
         boolean dealershipIDFound = false;
 
-        //outputMessage2 = "";
-        //System.out.println("Enter the dealer id of the dealership: ");
-        //String idString = input.nextLine();
-
         for (int i = 0; i < listOfDealers.size(); i++) {
+
             if (dealer_ID.equals(listOfDealers.get(i).getDealer_id())) {
+
                 listOfDealers.get(i).setIsActivatedStatus(true);
 
                 dealershipIDFound = true;
@@ -26,10 +24,8 @@ public class DealerOn {
         }
 
         if(dealershipIDFound == false){
-            System.out.println("Dealership ID " + dealer_ID + " does not exist.\n");
 
-            //System.out.println("Press enter to continue");
-            //input.nextLine();
+            System.out.println("Dealership ID " + dealer_ID + " does not exist.\n");
         }
 
         //resets dealershipIDFound

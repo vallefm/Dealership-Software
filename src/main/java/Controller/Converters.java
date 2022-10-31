@@ -32,19 +32,14 @@ public class Converters {
         allowedVehicles.add("sedan");
 
         HashMap<String,String> dealersNames = new HashMap<>();
-
         ArrayList<Vehicle> cars = new ArrayList<>();
 
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-
         DocumentBuilder db = dbf.newDocumentBuilder();
-
         Document doc = db.parse(new File(String.valueOf(xml)));
 
         doc.getDocumentElement().normalize();
-
         NodeList vehicles = doc.getElementsByTagName("Vehicle");
-
 
         // Not converted to our situation yet.
         for (int temp = 0; temp < vehicles.getLength(); temp++) {
@@ -55,27 +50,23 @@ public class Converters {
 
                 Element element = (Element) node;
 
+                String dName = null;
                 String dId = element.getParentNode().getAttributes().getNamedItem("id").getTextContent();
                 String vId = element.getAttribute("id");
                 String type = element.getAttribute("type");
-
                 String manufacturer = element.getElementsByTagName("Make").item(0).getTextContent();
                 String price = element.getElementsByTagName("Price").item(0).getTextContent();
                 String model = element.getElementsByTagName("Model").item(0).getTextContent();
-                Long aDate = System.currentTimeMillis();
-                String dName = null;
-
-                Node attr = element.getElementsByTagName("Price").item(0).getAttributes().getNamedItem("unit");
                 String unit = "";
+
+                Long aDate = System.currentTimeMillis();
+                
+                Node attr = element.getElementsByTagName("Price").item(0).getAttributes().getNamedItem("unit");
 
                 if(attr != null){
 
                     unit = attr.getTextContent();
-
                 }
-
-
-
 
                 if(node.getParentNode().getNodeType() == Node.ELEMENT_NODE){
                     Element parentElement = (Element) node.getParentNode();
@@ -83,9 +74,7 @@ public class Converters {
                         dName = parentElement.getElementsByTagName("Name").item(0).getTextContent();
                         dealersNames.put(dId, dName);
                     }
-
                 }
-
 
                 //temp
                 if (allowedVehicles.contains(type)) {
@@ -97,33 +86,16 @@ public class Converters {
                             vId,
                             Integer.parseInt(price),
                             aDate);
-
-                    //Need a company class to store listOfDealers
-//                    if(dName != null){
-//                        if(!cmds.listOfDealers.isEmpty()){
-//                            for(Dealer d : cmds.listOfDealers){
-//                                if(d.getDealer_id().equals(dId)){
-//                                    if(d.getName().equals("")){
-//                                        d.setName(dName);
-//                                    }
-//                                }
-//                            }
-//                        }
-//
-//                    }
                     cars.add(car);
                     if(unit.equalsIgnoreCase("pounds")){
                         car.setCurrencyType("£");
                     }
-
                 } else {
                     //if a non allowed car is read, do not add it to cars
                     System.out.println("Vehicle Type of " + type + " is not allowed for vehicle ID: "
                             + vId);
                     System.out.println("Vehicle not added.");
                 }
-
-
             }
         }
 
@@ -134,16 +106,6 @@ public class Converters {
             d.setName(dealersNames.get(d.getDealer_id()));
             listOfDealers.add(d);
         }
-        // put cars from json file into dealers
-        // create new dealer if car's dealership_id does not match any existing dealers
-//        for(Vehicle car : cars) {
-//            for(Dealer d : listOfDealers) {
-//                if(car.getDealership_id() != d.getDealer_id()){
-//                    listOfDealers.add(new Dealer(car.getDealership_id(), true));
-//                    d.addToListOfCarsAtDealer(car);
-//                }
-//            }
-//        }
 
         for(Vehicle car : cars) {
             Dealer dealer = listOfDealers.stream().filter(d -> d.getDealer_id().equals(car.getDealership_id())).findFirst().orElse(null);
@@ -152,11 +114,8 @@ public class Converters {
                     dealer.setName(dealersNames.get(dealer.getDealer_id()));
                     listOfDealers.add(dealer);
                 }
-                    dealer.addToListOfCarsAtDealer(car);
-            }
-
-
-
+            dealer.addToListOfCarsAtDealer(car);
+        }
         //Once done
         return listOfDealers;
 
@@ -189,25 +148,13 @@ public class Converters {
                         c.getAsJsonObject().get("vehicle_id").getAsString(),
                         c.getAsJsonObject().get("price").getAsInt(),
                         c.getAsJsonObject().get("acquisition_date").getAsLong());
-
-//                if(c.getAsJsonObject().get("Name") != null){
-//                    if(!cmds.listOfDealers.isEmpty()){
-//                        for(Dealer d : cmds.listOfDealers){
-//                            if(d.getDealer_id() == c.getAsJsonObject().get("dealership_id").getAsString()){
-//                                d.setName(c.getAsJsonObject().get("Name").getAsString());
-//                            }
-//                        }
-//                    }
-//                }
                 cars.add(car);
-
             } else {
                 //if a non allowed car is read, do not add it to cars
                 System.out.println("Vehicle Type of " + vehicleTypeString + " is not allowed for vehicle ID: "
                         + c.getAsJsonObject().get("vehicle_id").getAsString());
                 System.out.println("Vehicle not added.");
             }
-
         }
 
         if (listOfDealers.size() == 0 && cars.size() > 0) {
@@ -215,6 +162,7 @@ public class Converters {
                 //d.setName(dealersNames.get(d.getDealer_id()));
                 listOfDealers.add(d);
         }
+
         //This method duplicates cars
         for(Vehicle car : cars) {
             Dealer dealer = listOfDealers.stream().filter(d -> d.getDealer_id().equals(car.getDealership_id())).findFirst().orElse(null);

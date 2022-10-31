@@ -12,16 +12,20 @@ public class CreateDealer {
         //check if dealer ID already exists in Company.getCompany()
         //if dealer ID already exists error
         for(Dealer d : Company.getCompany()){
+
             if(d.getDealer_id().equals(dealerID)){
+
                 invalid_DealerID = true;
             }
         }
 
         //if dealerID is unique, create the dealer
         if(!invalid_DealerID){
+
             Dealer d = new Dealer(dealerID, dealerName);
             Company.getCompany().add(d);
         }
+        
         return invalid_DealerID;
     }
 }
