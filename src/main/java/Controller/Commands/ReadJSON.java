@@ -69,6 +69,7 @@ public class ReadJSON {
         }
 
 
+        
 
         //get dealerIDs for all dealers in Company
         List<String> companyDealerIDs = new ArrayList<>();
@@ -107,29 +108,8 @@ public class ReadJSON {
                     }
                 }
             }
-    }
+        }
 
-//
-//        // if listOfDealers is empty, add the dealer of the first car in listOfCars to
-//        // listOfDealers
-//        if (listOfDealers.size() == 0 && listOfCars.size() > 0) {
-//            listOfDealers.add(new Dealer(listOfCars.get(0).getDealership_id(), true));
-//        }
-//        // put cars from json file into dealers
-//        // create new dealer if car's dealership_id does not match any existing dealers
-//        for (Vehicle car : listOfCars) {
-//            for (int i = 0; i < listOfDealers.size(); i++) {
-//                Dealer dealer = listOfDealers.get(i);
-//                if (car.getDealership_id().equals(dealer.getDealer_id())) {
-//                    dealer.addToListOfCarsAtDealer(car);
-//                    break;
-//                }
-//                if (dealer == listOfDealers.get(listOfDealers.size() - 1)) {
-//                    listOfDealers.add(new Dealer(car.getDealership_id(), true));
-//                }
-//
-//            }
-//        }
-//
+
     }
 }
