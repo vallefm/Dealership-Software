@@ -1,10 +1,16 @@
 package Controller.GUIControllers;
 
-
 import Controller.CommandManager;
+
 import Models.Company;
 import Models.Dealer;
 import Models.Vehicle;
+
+import java.io.IOException;
+import java.net.URL;
+import java.time.Instant;
+import java.util.ResourceBundle;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -19,12 +25,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import view.dealership_software.GUI;
 
-import java.io.IOException;
-import java.net.URL;
-import java.time.Instant;
-import java.util.ResourceBundle;
+import view.dealership_software.GUI;
 
 public class dealerGUIController implements Initializable {
 
@@ -37,7 +39,7 @@ public class dealerGUIController implements Initializable {
     @FXML
     private ObservableList<Object> dealerList1;
     @FXML
-    private ListView dealerList;
+    private ListView<Object> dealerList;
 
     private CommandManager cmds = new CommandManager();
 
@@ -180,12 +182,13 @@ public class dealerGUIController implements Initializable {
     }
 
     @Override
+    @SuppressWarnings({"unchecked", "rawtypes"})
     public void initialize(URL location, ResourceBundle resources) {
 
         hideMessages();
 
         loadDealerList();
-
+        
         dealerList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {

@@ -1,5 +1,7 @@
 package view.dealership_software;
 
+import Controller.Converters.SerDataToObjArrays;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,7 +21,7 @@ public class GUI extends Application {
 
         if(f.exists() && !f.isDirectory()){
 
-            Controller.Converters.deserializeData(serializedDataFilePath);
+            SerDataToObjArrays.serDataToObjArrays(serializedDataFilePath);
         }
 
         Parent root = FXMLLoader.load(getClass().getResource("mainMenuGUI.fxml"));
@@ -29,7 +31,6 @@ public class GUI extends Application {
     }
 
     public static void main(String[] args) {
-        
         launch();
     }
 }

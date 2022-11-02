@@ -1,19 +1,7 @@
 package Controller;
 
-import org.xml.sax.SAXException;
-
-
-import java.io.IOException;
-import javax.xml.parsers.ParserConfigurationException;
-
 //The GUIControllers call this class. This class calls the command class that the GUIController needs to use
 public class CommandManager {
-
-    public void readJSON() throws IOException, ParserConfigurationException, SAXException {
-
-        Controller.Commands.ReadJSON command = new Controller.Commands.ReadJSON();
-        command.readJSON();
-    }
 
     public void dealerOff(String dealerID){
 

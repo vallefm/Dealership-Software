@@ -1,6 +1,7 @@
 package Controller.GUIControllers;
 
 import Controller.CommandManager;
+import Controller.Converters.*;
 
 import Models.Company;
 import Models.Dealer;
@@ -20,15 +21,19 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import javax.swing.*;
 import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import view.dealership_software.GUI;
 
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class mainMenuGUIController implements Initializable {
@@ -61,15 +66,34 @@ public class mainMenuGUIController implements Initializable {
     @FXML
     private ObservableList<Object> carList1;
     @FXML
-    private ListView carList;
+    private ListView<Object> carList;
 
     private CommandManager cmds = new CommandManager();
 
     public void readJson(ActionEvent event) throws IOException, ParserConfigurationException, SAXException{
+        
+        JButton open = new JButton();
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File(System.getProperty("user.dir")));
+        fileChooser.setDialogTitle("JSON file to Converter"); // Titles the text box
+        if (fileChooser.showOpenDialog(open) == JFileChooser.APPROVE_OPTION) {} //prob delete
+        String fileAbsolutePath = fileChooser.getSelectedFile().getAbsolutePath();
 
-        cmds.readJSON();
+        List<Dealer> listOfDealers;
+
+        //list of dealers contains all cars read from json file
+        if(fileAbsolutePath.contains(".xml")){
+            File file = new File(fileAbsolutePath);
+            listOfDealers = XmlToObjArrays.xmlToObjArrays(file);
+        }
+        else{
+            FileReader file = new FileReader(fileAbsolutePath);
+            listOfDealers = JsonToObjArrays.jsonToObjArrays(file);
+        }
+
+        Company.addDealerListToCompany(listOfDealers);
+
         loadCarList();
-
     }
 
     public void addCar(ActionEvent event){

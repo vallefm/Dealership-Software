@@ -1,14 +1,12 @@
 package Controller.Commands;
 
-import Controller.Converters;
+import Controller.Converters.ObjArraysToJson;
 import Models.Company;
 import Models.Dealer;
 
 public class ExportDealerToJSON {
 
     public boolean exportDealerToJSON(String dealerID) {
-
-        Converters c = new Converters();
 
         boolean invalid_DealerID = true;
 
@@ -27,7 +25,7 @@ public class ExportDealerToJSON {
         //if dealer found, export to JSON
         if(! invalid_DealerID){
             
-            c.convertToJson(dealer);
+            ObjArraysToJson.objArraysToJson(dealer);
         }
         
         return invalid_DealerID;
